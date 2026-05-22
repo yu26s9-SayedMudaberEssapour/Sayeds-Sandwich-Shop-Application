@@ -12,19 +12,34 @@ public class Console {
      * @return the double the user selected.
      */
     public static double promptForDouble(String prompt) {
+        double result = 0;
+        try{
+            System.out.print(prompt);
+            result =  scanner.nextDouble();
+            scanner.nextLine();
+        }
+        catch (Exception e){
+            System.out.println("Sorry Invalid input: ");
+            e.getMessage();
+        }
 
-        System.out.print(prompt);
-        double result =  scanner.nextDouble();
-        scanner.nextLine();
         return result;
 
     }
 
     public static float promptForFloat(String prompt) {
 
-        System.out.print(prompt);
-        float result =  scanner.nextFloat();
-        scanner.nextLine();
+        float result = 0;
+        try{
+            System.out.print(prompt);
+            result =  scanner.nextFloat();
+            scanner.nextLine();
+        }
+        catch (Exception e){
+            System.out.println("Sorry Invalid input: ");
+            e.getMessage();
+        }
+
         return result;
 
     }
@@ -46,9 +61,16 @@ public class Console {
      */
     public static int promptForInt(String prompt) {
 
-        System.out.print(prompt);
-        int result =  scanner.nextInt();
-        scanner.nextLine();
+        int result = 0;
+        try{
+            System.out.print(prompt);
+            result =  scanner.nextInt();
+            scanner.nextLine();
+        }
+        catch (Exception e){
+            System.out.println("Sorry Invalid Input! ");
+        }
+
         return result;
 
     }
@@ -59,16 +81,30 @@ public class Console {
      * @return the boolean
      */
     public static boolean promptForYesNo(String prompt) {
-        System.out.print(prompt);
-        String userInput = scanner.nextLine();
-        return userInput.equalsIgnoreCase("YES");
+        boolean result = false;
+        try{
+            System.out.print(prompt);
+            String userInput = scanner.nextLine();
+            result = userInput.equalsIgnoreCase("YES");
+        }
+        catch (Exception e){
+            System.out.println("Sorry Invalid Input");
+        }
+
+        return result;
         //opportunity to enhance this with some error protection.
     }
 
     public static long promptForLong(String prompt){
-        System.out.println(prompt);
-        long userInput = scanner.nextLong();
-        scanner.nextLine();
+        long userInput = 0;
+        try{
+            System.out.println(prompt);
+            userInput = scanner.nextLong();
+            scanner.nextLine();
+        }
+        catch (Exception e){
+            System.out.println("Sorry Invalid Input");
+        }
 
         return userInput;
     }}

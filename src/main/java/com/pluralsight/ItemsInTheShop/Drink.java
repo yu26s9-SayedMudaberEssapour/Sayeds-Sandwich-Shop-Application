@@ -1,6 +1,6 @@
 package com.pluralsight.ItemsInTheShop;
 
-public class Drink {
+public abstract class Drink {
     private String size; //small, medium, large
     private String flavor; //Coke, Fanta, Sprite, RootBeer etc...
 
