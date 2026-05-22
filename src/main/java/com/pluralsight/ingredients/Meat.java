@@ -2,7 +2,7 @@ package com.pluralsight.ingredients;
 
 import java.util.List;
 
-public class Meat implements Ingredients{
+public class Meat implements PremiumTopping{
     private List<String> typeOfMeat;
 
 

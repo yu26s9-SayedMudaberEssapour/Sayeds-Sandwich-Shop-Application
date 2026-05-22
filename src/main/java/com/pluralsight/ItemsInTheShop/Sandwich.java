@@ -8,6 +8,7 @@ import java.util.Map;
 public class Sandwich {
     protected int sandwichSize; //ask the user for 4" 8" 12"
     protected String typeOfBread;
+    protected double price;
 
 
     //There are 4 types of bread
