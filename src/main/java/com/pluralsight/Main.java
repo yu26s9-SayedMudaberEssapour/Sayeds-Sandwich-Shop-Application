@@ -1,5 +1,6 @@
 package com.pluralsight;
 
+import com.pluralsight.Screens.AddSandwichScreen;
 import com.pluralsight.Screens.HomeScreen;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -9,7 +10,9 @@ public class Main {
 
         HomeScreen hs = new HomeScreen();
 
-        System.out.println(hs.regularToppings());
+        AddSandwichScreen as = new AddSandwichScreen();
 
-    }
-}
+        hs.StartOrder();
+
+
+}}

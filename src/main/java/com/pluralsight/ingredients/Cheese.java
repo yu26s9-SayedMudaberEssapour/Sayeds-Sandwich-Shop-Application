@@ -4,21 +4,10 @@ import java.util.List;
 
 public class Cheese implements PremiumTopping{
 
-    private static List<String> typeOfCheese;
+    private static final String[] typeOfCheese = {"american", "provolone", "chedder", "swiss" , "paneer"};
 
-    public static List<String> getTypeOfCheese() {
+    public static String[] getTypeOfCheese() {
         return typeOfCheese;
-    }
-
-    /**
-     * This method is a class level method and it is used to load typeOfCheese List.
-     */
-    private void loadCheese(){
-        typeOfCheese.add("american");
-        typeOfCheese.add("provolone");
-        typeOfCheese.add("chedder");
-        typeOfCheese.add("swiss");
-        typeOfCheese.add("paneer");
     }
 
 

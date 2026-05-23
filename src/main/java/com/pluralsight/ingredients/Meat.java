@@ -1,19 +1,10 @@
 package com.pluralsight.ingredients;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Meat implements PremiumTopping{
-    private static List<String> typeOfMeat;
-
-
-    private void loadMeat(){
-        typeOfMeat.add("steam");
-        typeOfMeat.add("ham");
-        typeOfMeat.add("salami");
-        typeOfMeat.add("roast beef");
-        typeOfMeat.add("chicken");
-        typeOfMeat.add("bacon");
-    }
+    private static final String[] typeOfMeat = {"steam", "ham", "salami", "roast beef", "chicken", "bacon"};
 
 
     @Override
@@ -54,7 +45,7 @@ public class Meat implements PremiumTopping{
         return finalPrice;
     }
 
-    public static List<String> getTypeOfMeat() {
+    public static String[] getTypeOfMeat() {
         return typeOfMeat;
     }
 }

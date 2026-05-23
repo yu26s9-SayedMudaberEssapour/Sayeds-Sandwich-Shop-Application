@@ -1,8 +1,9 @@
 package com.pluralsight.ItemsInTheShop;
 
-public abstract class Drink {
+public class Drink {
     private String size; //small, medium, large
     private String flavor; //Coke, Fanta, Sprite, RootBeer etc...
+    private String extras;
 
     public String getSize() {
         return size;
@@ -20,8 +21,9 @@ public abstract class Drink {
         this.flavor = flavor;
     }
 
-    public Drink(String size, String flavor){
+    public Drink(String size, String flavor, String extras){
         this.flavor = flavor;
         this.size = size;
+        this.extras = extras;
     }
 }
