@@ -1,16 +1,22 @@
 package com.pluralsight.Screens;
 
-import com.pluralsight.ingredients.PremiumTopping;
+import com.pluralsight.ItemsInTheShop.Sandwich;
+import com.pluralsight.ingredients.Cheese;
+import com.pluralsight.ingredients.Meat;
+import com.pluralsight.ingredients.RegularToppings;
 import com.pluralsight.ingredients.Sauses;
 import com.pluralsight.ui.Console;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
-public class HomeScreen {
 
-    ArrayList<Object> CurrentOrder = new ArrayList<>();
+
+public class HomeScreen <T>{
+
+    ArrayList<T> CurrentOrder = new ArrayList<>();
 
 
 
@@ -28,7 +34,7 @@ public class HomeScreen {
 
             switch (input){
                 case "1":
-                    System.out.println("go to neworderscreen");
+                    orderScreen();
                     break;
                 case "0":
                     return;
@@ -55,7 +61,7 @@ public class HomeScreen {
 
             switch (input){
                 case "1":
-                    System.out.println("Add Sandwich");
+                    System.out.println("add sandwich");
                     break;
                 case "2":
                     System.out.println("Add Drink");
@@ -81,8 +87,9 @@ public class HomeScreen {
 
     //__________________Add Sandwich______________________________
 
+
     //3rd Screen here
-    public void AddSandwich(){
+    public void AddSandwich() {
 
         System.out.println("""
                 Time to add your Sandwich 🥪
@@ -133,32 +140,75 @@ public class HomeScreen {
                 
                 """);
 
+        //first ask the customer for their bread type
         String breadInput = Console.promptForString("Please Select your Bread Type: ");
+
+
+        //ask the customer for the size of the sandwich
         int SizeOfSandwich = Console.promptForInt(("Please Enter your Sandwich Size in (inches)"));
 
         //for toppings create another method and call it
+
+
         boolean shouldToast = Console.promptForYesNo("Do you want your Sandwich Toasted? (yes/no)");
-        //method for sauses
-        //method for other toppings
+
+        //here I am getting the type of meat
+
+
+
+        //this is how the
+        Sandwich sandwich = new Sandwich(SizeOfSandwich, breadInput, shouldToast, listOfSouses(), typeOfMeat(), typeOfCheese(), regularToppings());
+
+        //while these are being added we sh
 
     }
 
+
+    //give the ability to customers to select multiple meats
+    public String typeOfMeat(){
+        System.out.println("Here is a list of our meat selections.");
+
+        List<String> typesOfMeat = Meat.getTypeOfMeat();
+        for(String m : typesOfMeat){
+            System.out.println(m.toString());
+        }
+
+         return Console.promptForString("What type of meat do you want? ");
+    }
+
+
+
+    //give the ability to customers to select multiple Cheese
+    public String typeOfCheese(){
+        System.out.println("Here is a list of our Cheese selections.");
+
+        List<String> typesOfCheese = Cheese.getTypeOfCheese();
+        for(String m : typesOfCheese){
+            System.out.println(m.toString());
+        }
+
+        return Console.promptForString("What type of Cheese do you want? ");
+    }
+
+
+
+
+
+
+
+
+
     /**
      * This method takes as many Souses as the user would like to add and returns
-     * a list with those sauses listed. 
+     * a list with those souses listed.
      * @return
      */
-    public ArrayList<String> listOfSouses(){
+    public ArrayList<Sauses> listOfSouses(){
 
-        ArrayList<String> souseCondiment = new ArrayList<>();
+        ArrayList<Sauses> souseCondiment = new ArrayList<>();
 
-        List<String> availableSouses = new ArrayList<>();
-        availableSouses.add("Mayo");
-        availableSouses.add("Mustard");
-        availableSouses.add("Ketchup");
-        availableSouses.add("Ranch");
-        availableSouses.add("Thousand Island");
-        availableSouses.add("Vinaigrette");
+
+        List<Sauses> availableSouses = new ArrayList<>(Arrays.asList(Sauses.values()));
 
 
         System.out.println("""
@@ -179,9 +229,15 @@ public class HomeScreen {
             String turningFirstLetterToUpper = input.substring(0,1).toUpperCase();
             String joinBack = turningFirstLetterToUpper + input.substring(1);
 
-            if(availableSouses.contains(joinBack)){
-                souseCondiment.add(joinBack);
+            try{
+                if(availableSouses.contains(Sauses.valueOf(joinBack))){
+                    souseCondiment.add(Sauses.valueOf(joinBack));
+                }
             }
+            catch (Exception e){
+                System.out.println("Sorry your input is invalid try again");
+            }
+
         }
         while (!input.equalsIgnoreCase("Stop"));
 
@@ -189,6 +245,95 @@ public class HomeScreen {
         return souseCondiment;
 
     }
+
+
+    /**
+     * @return a list of all the regular toppings that the customer has chosen
+     */
+    public ArrayList<RegularToppings> regularToppings(){
+
+        ArrayList<RegularToppings> AdditionalToppings = new ArrayList<>();
+
+        //understand how this works
+        List<RegularToppings> ToppingInventory = new ArrayList<>(Arrays.asList(RegularToppings.values()));
+
+
+        System.out.println("""
+                  (Toppings)
+                    lettuce
+                    Pepper
+                    jalapeños
+                    onion
+                    tomatoes
+                    pickles
+                    guacamole
+                    mushrooms
+               """);
+
+        String input = "";
+
+        do {
+            input = Console.promptForString("Type the name of the topping or type (Stop) ");
+            String turningFirstLetterToUpper = input.substring(0,1).toUpperCase();
+            String joinBack = turningFirstLetterToUpper + input.substring(1);
+
+            try{
+                if(ToppingInventory.contains(RegularToppings.valueOf(joinBack))){
+                    AdditionalToppings.add(RegularToppings.valueOf(joinBack));
+                }
+            }
+            catch (Exception e){
+                System.out.println("Sorry wrong input try again with the listed inputs");
+            }
+
+        }
+        while (!input.equalsIgnoreCase("Stop"));
+
+
+        return AdditionalToppings;
+
+    }
+
+
+    /**
+     * This method gets the size of the break and then returns the price of that size
+     * not including anything else.
+     * @param sizeBread the size that is provided by the user
+     * @return the price of the size.
+     */
+    public double priceSandwichBasedOnSize(int sizeBread){
+        double price = 0;
+        switch (sizeBread){
+            case 4:
+                price = 5.50;
+                break;
+            case 8:
+                price = 7.0;
+                break;
+            case 12:
+                price = 12.0;
+                break;
+            default:
+                break;
+        }
+        return price;
+    }
+
+
+    public ArrayList<String> sides(){
+        //todo
+        return null;
+    }
+
+
+    //__________________________________Drinks_______________________________________________
+
+
+
+
+
+
+
 
 
 

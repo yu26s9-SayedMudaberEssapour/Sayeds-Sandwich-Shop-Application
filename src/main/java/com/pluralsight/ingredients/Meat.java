@@ -3,7 +3,7 @@ package com.pluralsight.ingredients;
 import java.util.List;
 
 public class Meat implements PremiumTopping{
-    private List<String> typeOfMeat;
+    private static List<String> typeOfMeat;
 
 
     private void loadMeat(){
@@ -15,6 +15,25 @@ public class Meat implements PremiumTopping{
         typeOfMeat.add("bacon");
     }
 
+
+    @Override
+    public double priceForRegular(int sizeMeat){
+        double price = 0;
+        switch (sizeMeat){
+            case 4:
+                price = 1.0;
+                break;
+            case 8:
+                price = 2.0;
+                break;
+            case 12:
+                price = 3.0;
+                break;
+            default:
+                break;
+        }
+        return price;
+    }
 
     @Override
     public float priceForExtra(int size) {
@@ -35,4 +54,7 @@ public class Meat implements PremiumTopping{
         return finalPrice;
     }
 
+    public static List<String> getTypeOfMeat() {
+        return typeOfMeat;
+    }
 }

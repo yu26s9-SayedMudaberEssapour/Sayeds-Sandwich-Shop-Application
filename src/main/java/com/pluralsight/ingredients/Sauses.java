@@ -4,7 +4,7 @@ public enum Sauses {
     Mayo,
     Mustard,
     Ketchup,
-    ranch,
-    ThousandIsland,
+    Ranch,
+    Thousandisland,
     Vinaigrette
 }

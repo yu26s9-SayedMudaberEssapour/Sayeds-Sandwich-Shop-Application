@@ -9,7 +9,7 @@ public class Main {
 
         HomeScreen hs = new HomeScreen();
 
-        System.out.println(hs.listOfSouses());;
+        System.out.println(hs.regularToppings());
 
     }
 }

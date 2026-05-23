@@ -4,8 +4,11 @@ import java.util.List;
 
 public class Cheese implements PremiumTopping{
 
-    private List<String> typeOfCheese;
+    private static List<String> typeOfCheese;
 
+    public static List<String> getTypeOfCheese() {
+        return typeOfCheese;
+    }
 
     /**
      * This method is a class level method and it is used to load typeOfCheese List.
@@ -19,6 +22,24 @@ public class Cheese implements PremiumTopping{
     }
 
 
+    @Override
+    public double priceForRegular(int sizeCheese){
+        double price = 0;
+        switch (sizeCheese){
+            case 4:
+                price = .75;
+                break;
+            case 8:
+                price = 1.5;
+                break;
+            case 12:
+                price = 2.25;
+                break;
+            default:
+                break;
+        }
+        return price;
+    }
 
     @Override
     public float priceForExtra(int size) {
