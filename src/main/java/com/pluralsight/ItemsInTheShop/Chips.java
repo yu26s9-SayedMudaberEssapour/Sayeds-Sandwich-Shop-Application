@@ -1,6 +1,6 @@
 package com.pluralsight.ItemsInTheShop;
 
-public  class Chips {
+public class Chips {
     private String typeOfChips;
 
 

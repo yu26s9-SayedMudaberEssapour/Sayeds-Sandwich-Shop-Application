@@ -16,29 +16,31 @@ public class HomeScreen <T>{
 
         while(true){
             System.out.println("""
-                                                            ╔══════════════════════════════════════════════════════╗
-                                                            ║          WELCOME TO SAYED'S SANDWICH SHOP 🥪        ║
-                                                            ╚══════════════════════════════════════════════════════╝
-                                                            
-                                                            Fresh ingredients. Perfect sandwiches. Made your way.
-                                                            
-                                                            ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-                                                            
-                                                               [1] 🛒 Start New Order
-                                                               [0] 🚪 Exit Application
-                                                            
-                                                            ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-                                                            
-                                                            👉 Please select an option:
+                                                                ╔══════════════════════════════════════════════════════╗
+                                                                ║          WELCOME TO SAYED'S SANDWICH SHOP 🥪         ║
+                                                                ╚══════════════════════════════════════════════════════╝
+                        
+                                                                Fresh ingredients. Perfect sandwiches. Made your way.
+                    
+                                                                We’re happy to serve you today!
+                    
+                                                                ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                    
+                                                                   [1] 🛒 Start New Order
+                                                                   [0] 🚪 Exit Application
+                    
+                                                                ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                    
+                                                                👉 Please select an option:
                 """);
 
-            String input = Console.promptForString("Please enter your response here: ");
+            int input = Console.promptForInt("Please enter your response here: ");
 
             switch (input){
-                case "1":
+                case 1:
                     orderScreen();
                     break;
-                case "0":
+                case 0:
                     System.out.println("You have exited the application 😞");
                     return;
                 default:

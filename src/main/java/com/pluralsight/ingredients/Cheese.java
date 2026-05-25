@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Cheese implements PremiumTopping{
 
-    private static final String[] typeOfCheese = {"american", "provolone", "chedder", "swiss" , "paneer"};
+    private static final String[] typeOfCheese = {"American", "Provolone", "Cheddar", "Swiss" , "Paneer"};
 
     public static String[] getTypeOfCheese() {
         return typeOfCheese;

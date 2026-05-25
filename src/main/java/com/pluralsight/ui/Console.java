@@ -19,7 +19,7 @@ public class Console {
             scanner.nextLine();
         }
         catch (Exception e){
-            System.out.println("Sorry Invalid input: ");
+            System.out.println("Sorry Invalid input, only type a decimal number ");
             e.getMessage();
         }
 
@@ -36,7 +36,7 @@ public class Console {
             scanner.nextLine();
         }
         catch (Exception e){
-            System.out.println("Sorry Invalid input: ");
+            System.out.println("Sorry Invalid input only type a Decimal Number ");
             e.getMessage();
         }
 
@@ -62,14 +62,24 @@ public class Console {
     public static int promptForInt(String prompt) {
 
         int result = 0;
-        try{
-            System.out.print(prompt);
-            result =  scanner.nextInt();
-            scanner.nextLine();
-        }
-        catch (Exception e){
-            System.out.println("Sorry Invalid Input! ");
-        }
+        boolean go = true;
+
+
+       while(go){
+           try{
+               System.out.print(prompt + " ");
+               result =  scanner.nextInt();
+               scanner.nextLine();
+               go = false;
+
+           }
+
+           catch (Exception e){
+               System.out.println("Sorry Invalid Input, only type an Integer ");
+               scanner.nextLine();
+           }
+       }
+
 
         return result;
 
