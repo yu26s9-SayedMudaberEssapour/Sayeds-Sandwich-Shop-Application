@@ -35,6 +35,7 @@ public class AddChips {
         String input = Console.promptForString("Please enter the type of chips you want for your order: ");
 
         Chips chips = new Chips(input);
+        System.out.println("The price of chips is: " + chips.getPrice());
     }
 
 }

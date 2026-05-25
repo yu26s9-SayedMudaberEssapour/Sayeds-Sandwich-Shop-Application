@@ -51,7 +51,7 @@ public class AddDrink {
 
         //should get the size
 
-        String size = Console.promptForString("What size drink do you want enter the corresponding number: ");
+        String size = drinkSize();
 
         String flavor = Console.promptForString("What flavor of drink do you want? ");
 
@@ -64,5 +64,56 @@ public class AddDrink {
 
         Drink drink = new Drink(size, flavor, extras);
 
+        System.out.println("the price of the drink is: " + drink.getPrice());;
+
+    }
+
+
+
+    public static String drinkSize(){
+
+        String result = "";
+        int sizeOfDrink = 0;
+        do {
+            sizeOfDrink = Console.promptForInt(("""
+                                                                ╔══════════════════════════════════════════════════════╗
+                                                                ║               SELECT YOUR SIZE 📏                    ║
+                                                                ╚══════════════════════════════════════════════════════╝
+                                                                
+                                                                Choose the perfect size for your Drink!
+                                                                
+                                                                ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                
+                                                                📏 AVAILABLE SIZES
+                                                                   [1] Small   - 16 oz
+                                                                   [2] Medium  - 24 oz
+                                                                   [3] Large   - 32 oz
+                                                                
+                                                                ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                                                                
+                                                                👉 Please enter the corresponding number for your Drink size:
+                """));
+
+
+            switch (sizeOfDrink){
+                case 1:
+                    result = "Small";
+                    break;
+                case 2:
+                    result = "Medium";
+                    break;
+                case 3:
+                    result = "Large";
+                    break;
+                default:
+                    break;
+            }
+            if((sizeOfDrink == 1) || (sizeOfDrink == 2 )||(sizeOfDrink == 3)){
+                break;
+            }
+        }
+        while((sizeOfDrink != 1) || (sizeOfDrink != 2) || sizeOfDrink != 3);
+
+        return result;
     }
 }

@@ -26,4 +26,30 @@ public class Drink {
         this.size = size;
         this.extras = extras;
     }
+
+
+    public double getPrice(){
+
+        String size = getSize();
+
+        double priceSize = 0;
+
+        switch (size){
+            case "Small":
+                priceSize += 2.00;
+                break;
+            case "Medium":
+                priceSize += 2.50;
+                break;
+            case "Large":
+                priceSize += 3.00;
+                break;
+            default:
+                break;
+        }
+
+        return priceSize;
+
+
+    }
 }
