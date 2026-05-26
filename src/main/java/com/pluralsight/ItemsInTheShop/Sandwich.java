@@ -1,55 +1,75 @@
 package com.pluralsight.ItemsInTheShop;
 
-
-import com.pluralsight.ingredients.Cheese;
-import com.pluralsight.ingredients.Meat;
+import com.pluralsight.ingredients.Cheeses;
+import com.pluralsight.ingredients.Meats;
 import com.pluralsight.ingredients.RegularToppings;
 import com.pluralsight.ingredients.Sauses;
-import com.pluralsight.ui.Console;
 
-import java.security.ProtectionDomain;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
-public class Sandwich {
-    private String sandwichSize; //ask the user for 4" 8" 12"
+public class Sandwich extends OrderItems {
+
+    private String sandwichSize; // ask the user for 4" 8" 12"
     private String typeOfBread;
     private double price;
-    private ArrayList<String> meat; //figure our how to do meat type later
-    private ArrayList<String> cheese;
 
+    private ArrayList<Meats> meat;
+    private ArrayList<Cheeses> cheese;
+    private ArrayList<Sauses> sauses;
+    private ArrayList<RegularToppings> toppings;
 
-    //There are 4 types of bread
+    protected String shouldToast; // yes = true, no = false
 
-    protected boolean shouldToast; //yes= True, no=false
-
-    public ArrayList<String> getMeat() {
-        return this.meat;
-    }
-
-    public ArrayList<String> getCheese() {
-        return this.cheese;
-    }
-
-    public Sandwich(String sandwichSize, String typeOfBread, boolean shouldToast, ArrayList<Sauses> souse, ArrayList<String> meat, ArrayList<String> cheese, ArrayList<RegularToppings> additionalTopping){
+    // Constructor
+    public Sandwich(
+            String sandwichSize,
+            String typeOfBread,
+            ArrayList<Meats> meat,
+            ArrayList<Cheeses> cheese,
+            ArrayList<RegularToppings> toppings,
+            ArrayList<Sauses> sauses,
+            String shouldToast
+    ) {
         this.sandwichSize = sandwichSize;
         this.typeOfBread = typeOfBread;
-        this.shouldToast = shouldToast;
         this.meat = meat;
         this.cheese = cheese;
-        //make it type meat
-        //make it type cheese
-
+        this.toppings = toppings;
+        this.sauses = sauses;
+        this.shouldToast = shouldToast;
     }
 
+    // Getters
     public String getSandwichSize() {
         return sandwichSize;
     }
 
-    //there should be two kinds of pricing one should be with meal and one without.
-    //let figure out how to just do it without the meal
-    public double getPrice(){
+    public String getTypeOfBread() {
+        return typeOfBread;
+    }
+
+    public String isShouldToast() {
+        return shouldToast;
+    }
+
+    public ArrayList<Meats> getMeat() {
+        return this.meat;
+    }
+
+    public ArrayList<Cheeses> getCheese() {
+        return this.cheese;
+    }
+
+    public ArrayList<Sauses> getSauses() {
+        return sauses;
+    }
+
+    public ArrayList<RegularToppings> getToppings() {
+        return toppings;
+    }
+
+    // Pricing
+    public double getPrice() {
 
         double priceSize = 0;
         double priceMeat = 0;
@@ -57,7 +77,7 @@ public class Sandwich {
 
         String sizeOfBread = getSandwichSize();
 
-        switch (sizeOfBread){
+        switch (sizeOfBread) {
             case "Small":
                 priceSize += 5.50;
                 break;
@@ -75,20 +95,17 @@ public class Sandwich {
         priceCheese += priceOfCheese();
 
         return priceSize + priceMeat + priceCheese;
-
-
-
     }
 
-    public double priceOfMeat(){
+    public double priceOfMeat() {
 
         double total = 0;
 
-        if(getMeat().size() > 1){
-            for(int i = 1; i < getMeat().size(); i++){
-                switch (getSandwichSize()){
+        if (getMeat().size() > 1) {
+            for (int i = 1; i < getMeat().size(); i++) {
+                switch (getSandwichSize()) {
                     case "Small":
-                        total += .50;
+                        total += 0.50;
                         break;
                     case "Medium":
                         total += 1.00;
@@ -102,7 +119,7 @@ public class Sandwich {
             }
         }
 
-        switch (getSandwichSize()){
+        switch (getSandwichSize()) {
             case "Small":
                 total += 1.00;
                 break;
@@ -115,26 +132,25 @@ public class Sandwich {
             default:
                 break;
         }
-        return total;
 
+        return total;
     }
 
-
-    public double priceOfCheese(){
+    public double priceOfCheese() {
 
         double total = 0;
 
-        if(getCheese().size() > 1){
-            for(int i = 1; i < getCheese().size(); i++){
-                switch (getSandwichSize()){
+        if (getCheese().size() > 1) {
+            for (int i = 1; i < getCheese().size(); i++) {
+                switch (getSandwichSize()) {
                     case "Small":
-                        total += .30;
+                        total += 0.30;
                         break;
                     case "Medium":
-                        total += .60;
+                        total += 0.60;
                         break;
                     case "Large":
-                        total += .90;
+                        total += 0.90;
                         break;
                     default:
                         break;
@@ -142,9 +158,9 @@ public class Sandwich {
             }
         }
 
-        switch (getSandwichSize()){
+        switch (getSandwichSize()) {
             case "Small":
-                total += .75;
+                total += 0.75;
                 break;
             case "Medium":
                 total += 1.50;
@@ -155,8 +171,31 @@ public class Sandwich {
             default:
                 break;
         }
-        return total;
 
+        return total;
     }
 
+    @Override
+    public String toString() {
+        return """
+        ===== SANDWICH =====
+        Size: %s
+        Bread: %s
+        Toasted: %s
+        Meat: %s
+        Cheese: %s
+        Sauces: %s
+        Toppings: %s
+        Price: $%.2f
+        """.formatted(
+                sandwichSize,
+                typeOfBread,
+                shouldToast,
+                meat,
+                cheese,
+                sauses,
+                toppings,
+                getPrice()
+        );
+    }
 }

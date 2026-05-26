@@ -5,6 +5,7 @@ import com.pluralsight.ui.Console;
 import static com.pluralsight.Screens.AddChips.addChips;
 import static com.pluralsight.Screens.AddDrink.addDrink;
 import static com.pluralsight.Screens.AddSandwichScreen.AddSandwich;
+import static com.pluralsight.Screens.CheckOut.checkOut;
 
 public class OrderScreen {
 
@@ -50,8 +51,8 @@ public class OrderScreen {
                     break;
 
                 case "4":
-                    System.out.println("CheckOut");
-                    break;
+                    checkOut();
+                    return;
 
                 case "5":
                     //here I should delete everything.

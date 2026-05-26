@@ -1,6 +1,6 @@
 package com.pluralsight.ItemsInTheShop;
 
-public class Drink {
+public class Drink extends OrderItems{
     private String size; //small, medium, large
     private String flavor; //Coke, Fanta, Sprite, RootBeer etc...
     private String extras;
@@ -51,5 +51,21 @@ public class Drink {
         return priceSize;
 
 
+    }
+
+
+    @Override
+    public String toString() {
+        return """
+    ===== Drink =====
+    Size of Drink: %s
+    Flavor of Drink: %s
+    Price: $%.2f
+    
+    """.formatted(
+                size,
+                flavor,
+                getPrice()
+        );
     }
 }

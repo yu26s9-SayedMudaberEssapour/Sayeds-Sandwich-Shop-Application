@@ -2,6 +2,7 @@ package com.pluralsight;
 
 import com.pluralsight.ItemsInTheShop.Sandwich;
 import com.pluralsight.Screens.AddSandwichScreen;
+import com.pluralsight.Screens.CheckOut;
 import com.pluralsight.Screens.HomeScreen;
 import com.pluralsight.ingredients.RegularToppings;
 import com.pluralsight.ingredients.Sauses;
@@ -15,6 +16,9 @@ public class UserInterface {
         HomeScreen hs = new HomeScreen();
 
         hs.StartOrder();
+
+        //CheckOut c = new CheckOut();
+        //c.checkOut();
 
 //        ArrayList<Sauses> sause= new ArrayList<>();
 //        sause.add(Sauses.Vinaigrette);

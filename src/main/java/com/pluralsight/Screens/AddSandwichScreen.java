@@ -1,5 +1,6 @@
 package com.pluralsight.Screens;
 
+import com.pluralsight.ItemsInTheShop.OrderItems;
 import com.pluralsight.ItemsInTheShop.Sandwich;
 import com.pluralsight.ingredients.RegularToppings;
 import com.pluralsight.ingredients.Sauses;
@@ -9,9 +10,8 @@ import com.pluralsight.ingredients.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
-public class AddSandwichScreen <T>{
+public class AddSandwichScreen extends OrderItems {
 
     //__________________Add Sandwich______________________________
 
@@ -20,16 +20,16 @@ public class AddSandwichScreen <T>{
     public static void AddSandwich() {
 
         //(1)first ask the customer for their bread type
-        String breadInput = returnTypeOfBread();
+        String breadInput = TypeOfBread();
 
         //(2)ask the customer for the size of the sandwich
         String SizeOfSandwich = sandwichSize();
 
         //(3)list of meat
-        ArrayList<String> meat = typeOfMeat();
+        ArrayList<Meats> meat = typeOfMeat();
 
         //(4)list of Cheese
-        ArrayList<String> cheese = typeOfCheese();
+        ArrayList<Cheeses> cheese = typeOfCheese();
 
         //(5)regular toppings
         ArrayList<RegularToppings> regularTopping = regularToppings();
@@ -38,21 +38,37 @@ public class AddSandwichScreen <T>{
         ArrayList<Sauses> Sauses = listOfSouses();
 
         //(7)ask the user if they want sandwich toasted
-        boolean shouldToast = shouldToast();
+        String shouldToast = shouldToast();
 
 
         //this is how the
-        Sandwich sandwich = new Sandwich(SizeOfSandwich, breadInput, shouldToast, Sauses, meat, cheese, regularTopping);
+        //String sandwichSize, String typeOfBread, ArrayList<Meats> meat, ArrayList<Cheeses> cheese, ArrayList<RegularToppings> toppings, ArrayList<Sauses> sauses, boolean shouldToast
+        Sandwich sandwich = new Sandwich(SizeOfSandwich, breadInput, meat,  cheese, regularTopping,Sauses, shouldToast);
         System.out.println("price of this sandwich is " + sandwich.getPrice());
 
         //should be able to add sandwich to the current order.
+        StringBuilder sb = new StringBuilder();
+        sb.append(sandwich.getSandwichSize());
+        sb.append(sandwich.getTypeOfBread());
+        sb.append( sandwich.isShouldToast());
+        sb.append(sandwich.getSauses());
+        sb.append(sandwich.getMeat());
+        sb.append(sandwich.getCheese());
+        sb.append(sandwich.getToppings());
+        sb.append(sandwich.getPrice());
+
+        totalPrice += sandwich.getPrice();
+        currentOrder.put(sandwich, sb.toString());
 
 
 
     }
-    private static boolean shouldToast(){
+
+    //--------------------------Should Toast----------------------------------
+    private static String shouldToast(){
         boolean result = false;
-        int shouldToast = Console.promptForInt("""
+
+        System.out.println("""
                                                                 ╔══════════════════════════════════════════════════════╗
                                                                 ║              TOAST YOUR SANDWICH 🔥                  ║
                                                                 ╚══════════════════════════════════════════════════════╝
@@ -68,8 +84,9 @@ public class AddSandwichScreen <T>{
                                                                 
                                                                 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
                                                                 
-                                                                👉 Enter your choice (1/2):
+                                                                
                 """);
+        int shouldToast = Console.promptForInt("👉 Enter your choice (1/2): " );
 
         switch (shouldToast){
             case 1:
@@ -80,15 +97,17 @@ public class AddSandwichScreen <T>{
             default:
                 break;
         }
-        return result;
+        return (!result) ? ("No") : ("Yes");
     }
 
+    //--------------------------SandwichSize----------------------------------
     public static String sandwichSize(){
 
         String result = "";
         int sizeOfSandwich = 0;
         do {
-            sizeOfSandwich = Console.promptForInt(("""
+
+            System.out.println("""
                                                                 ╔══════════════════════════════════════════════════════╗
                                                                 ║               SELECT YOUR SIZE 📏                    ║
                                                                 ╚══════════════════════════════════════════════════════╝
@@ -104,8 +123,9 @@ public class AddSandwichScreen <T>{
                                                                 
                                                                 ════════════════════════════════════════════════════════
                                                                 
-                                                                👉 Please enter the corresponding number for your sandwich size:
-                """));
+                
+                """);
+            sizeOfSandwich = Console.promptForInt("👉 Please enter the corresponding number for your sandwich size:");
 
 
             switch (sizeOfSandwich){
@@ -125,35 +145,17 @@ public class AddSandwichScreen <T>{
                 break;
             }
         }
-        while((sizeOfSandwich != 1) || (sizeOfSandwich != 2) || sizeOfSandwich != 3);
+        while((sizeOfSandwich < 1) && (sizeOfSandwich > 3));
 
         return result;
     }
 
 
 
+    //--------------------------returnTypeBread----------------------------------
+    public static String TypeOfBread(){
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public static String returnTypeOfBread(){
-
-        int breadInput = Console.promptForInt("""
+        System.out.println("""
                                                                 ╔══════════════════════════════════════════════════════╗
                                                                 ║                SELECT YOUR BREAD 🍞                  ║
                                                                 ╚══════════════════════════════════════════════════════╝
@@ -170,8 +172,9 @@ public class AddSandwichScreen <T>{
                                                                 
                                                                 ════════════════════════════════════════════════════════
                                                                 
-                                                                👉 Enter your bread choice:
+                 
                 """);
+        int breadInput = Console.promptForInt("👉 Please enter the corresponding number for your response");
         String result = "";
         switch (breadInput){
             case 1:
@@ -193,6 +196,9 @@ public class AddSandwichScreen <T>{
         return result;
     }
 
+
+
+    //--------------------------listOfSauses----------------------------------
     /**
      * This method takes as many Souses as the user would like to add and returns
      * a list with those souses listed.
@@ -200,13 +206,13 @@ public class AddSandwichScreen <T>{
      */
     private static ArrayList<Sauses> listOfSouses() {
 
-        ArrayList<Sauses> souseCondiment = new ArrayList<>();
+        ArrayList<Sauses> sauceCondiment = new ArrayList<>();
 
 
-        List<Sauses> availableSouses = new ArrayList<>(Arrays.asList(Sauses.values()));
+        List<Sauses> availableSauce = new ArrayList<>(Arrays.asList(Sauses.values()));
 
         while (true) {
-            int choice = Console.promptForInt(("""
+            System.out.println("""
                                                                 ╔══════════════════════════════════════════════════════╗
                                                                 ║                     SAUCES 🥫                        ║
                                                                 ╚══════════════════════════════════════════════════════╝
@@ -222,13 +228,20 @@ public class AddSandwichScreen <T>{
                                                                    [4] Ranch
                                                                    [5] Thousand Island
                                                                    [6] Vinaigrette
-                                                                   [0] Stop 
-                                                            
+                                                                   [7] No Sauce
+                                                                
+                                                                ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                                                                
+                                                                   [0] 🛑 Stop Adding Sauce
+                                                                
+                                                               ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                                                         
                                                                 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
                                                             
-                                                                👉 Select your sauces (you may choose multiple):
+                                                                
                     
-                    """));
+                    """);
+            int choice = Console.promptForInt(("👉 Select your sauces (you may choose multiple): "));
 
             if (choice == 0) {
                 break;
@@ -236,23 +249,25 @@ public class AddSandwichScreen <T>{
 
             switch (choice) {
                 case 1:
-                    souseCondiment.add(availableSouses.getFirst());
+                    sauceCondiment.add(availableSauce.getFirst());
                     break;
                 case 2:
-                    souseCondiment.add(availableSouses.get(1));
+                    sauceCondiment.add(availableSauce.get(1));
                     break;
                 case 3:
-                    souseCondiment.add(availableSouses.get(2));
+                    sauceCondiment.add(availableSauce.get(2));
                     break;
                 case 4:
-                    souseCondiment.add(availableSouses.get(3));
+                    sauceCondiment.add(availableSauce.get(3));
                     break;
                 case 5:
-                    souseCondiment.add(availableSouses.get(4));
+                    sauceCondiment.add(availableSauce.get(4));
                     break;
                 case 6:
-                    souseCondiment.add(availableSouses.get(5));
+                    sauceCondiment.add(availableSauce.get(5));
                     break;
+                case 7:
+                    sauceCondiment.clear();
                 default:
                     System.out.println("Invalid choice. Please select a valid topping.");
                     break;
@@ -261,12 +276,17 @@ public class AddSandwichScreen <T>{
 
 
         }
-        return souseCondiment;
+        return sauceCondiment;
 
 
 
     }
 
+
+
+
+
+    //--------------------------regularTopping----------------------------------
     /**
      * @return a list of all the regular toppings that the customer has chosen
      */
@@ -280,16 +300,16 @@ public class AddSandwichScreen <T>{
 
 
         while(true){
-            int choice = Console.promptForInt("""
+            System.out.println("""
                                                                ╔══════════════════════════════════════════════════════╗
-                                                               ║              SELECT YOUR TOPPINGS 🥬                 ║
+                                                               ║              SELECT YOUR Veggie-Toppings 🥬          ║
                                                                ╚══════════════════════════════════════════════════════╝
                                                             
                                                                Add fresh toppings to build your perfect sandwich!
                                                             
                                                                ════════════════════════════════════════════════════════
                                                             
-                                                               🥬 AVAILABLE TOPPINGS
+                                                               🥬 AVAILABLE Veggie-Toppings
                                                                   [1] Lettuce
                                                                   [2] Pepper
                                                                   [3] Jalapeños
@@ -298,12 +318,19 @@ public class AddSandwichScreen <T>{
                                                                   [6] Pickles
                                                                   [7] Guacamole
                                                                   [8] Mushrooms
-                                                                  [0] Stop 
+                                                                  [9] No Veggie-Topping
+                                                                  
+                                                               ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                                                                
+                                                                   [0] 🛑 Stop Adding Veggie-Toppings
+                                                                
+                                                               ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
                                                             
                                                                ════════════════════════════════════════════════════════
                                                             
-                                                               👉 Please enter your topping choices:
+                                                               
            """);
+            int choice = Console.promptForInt("👉 Please enter your topping choices:");
 
             if(choice == 0){
                 break;
@@ -334,6 +361,8 @@ public class AddSandwichScreen <T>{
                 case 8:
                     additionalToppings.add(toppingInventory.get(7));
                     break;
+                case 9:
+                    additionalToppings.clear();
                 default:
                     System.out.println("Invalid choice. Please select a valid topping.");
                     break;
@@ -346,11 +375,15 @@ public class AddSandwichScreen <T>{
     }
 
 
+
+
+
+    //--------------------------TypeOfMeat----------------------------------
     //give the ability to customers to select multiple meats
     //meat should be type meat
-    private static ArrayList<String> typeOfMeat(){
+    private static ArrayList<Meats> typeOfMeat(){
 
-        ArrayList<String> meatOnOrder = new ArrayList<>();
+        ArrayList<Meats> meatOnOrder = new ArrayList<>();
 
 
         System.out.println("""
@@ -372,32 +405,32 @@ public class AddSandwichScreen <T>{
                                                                 
                                                                 ════════════════════════════════════════════════════════
                                                                 
-                                                                👉 Enter the meat you would like:
+                                                                
                 """);
 
         int input = Console.promptForInt("""
-                Please select your meat type:
+                👉 Enter the meat you would like: 
                 """);
 
 
         switch (input) {
             case 1:
-                meatOnOrder.add("Steak");
+                meatOnOrder.add(Meats.Steak);
                 break;
             case 2:
-                meatOnOrder.add("Ham");
+                meatOnOrder.add(Meats.Ham);
                 break;
             case 3:
-                meatOnOrder.add("Salami");
+                meatOnOrder.add(Meats.Salami);
                 break;
             case 4:
-                meatOnOrder.add("Roast Beef");
+                meatOnOrder.add(Meats.Roastbeef);
                 break;
             case 5:
-                meatOnOrder.add("Chicken");
+                meatOnOrder.add(Meats.Chicken);
                 break;
             case 6:
-                meatOnOrder.add("Bacon");
+                meatOnOrder.add(Meats.Bacon);
                 break;
             default:
                 break;
@@ -407,7 +440,7 @@ public class AddSandwichScreen <T>{
 
 
         while (true){
-            int inputExtra = Console.promptForInt("""
+            System.out.println("""
                                                             If you would like extra meat please select which one or type (0) to stop.
                                                             
                                                                 ╔══════════════════════════════════════════════════════╗
@@ -432,29 +465,30 @@ public class AddSandwichScreen <T>{
                                                                 
                                                                 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
                                                                 
-                                                                👉 Enter your choice:
+                                                                
                 """);
+            int inputExtra = Console.promptForInt("👉 Enter your choice:");
             if(inputExtra == 0){
                 break;
             }
             switch (inputExtra){
                 case 1:
-                    meatOnOrder.add("Steak");
+                    meatOnOrder.add(Meats.Steak);
                     break;
                 case 2:
-                    meatOnOrder.add("Ham");
+                    meatOnOrder.add(Meats.Ham);
                     break;
                 case 3:
-                    meatOnOrder.add("Salami");
+                    meatOnOrder.add(Meats.Salami);
                     break;
                 case 4:
-                    meatOnOrder.add("Roast Beef");
+                    meatOnOrder.add(Meats.Roastbeef);
                     break;
                 case 5:
-                    meatOnOrder.add("Chicken");
+                    meatOnOrder.add(Meats.Chicken);
                     break;
                 case 6:
-                    meatOnOrder.add("Bacon");
+                    meatOnOrder.add(Meats.Bacon);
                     break;
                 default:
                     break;
@@ -462,20 +496,13 @@ public class AddSandwichScreen <T>{
             }
         }
         return meatOnOrder;
-
-        //        String[] typesOfMeat = Meat.getTypeOfMeat();
-//        for(String m : typesOfMeat){
-//            System.out.println(m.toString());
-//        }
-
-
     }
 
 
     //give the ability to customers to select multiple Cheese
     //should be able to add many different types of cheese
-    private static ArrayList<String> typeOfCheese(){
-        ArrayList<String> cheeseOnOrder = new ArrayList<>();
+    private static ArrayList<Cheeses> typeOfCheese(){
+        ArrayList<Cheeses> cheeseOnOrder = new ArrayList<>();
 
 
         System.out.println("""
@@ -496,29 +523,31 @@ public class AddSandwichScreen <T>{
                                                                 
                                                                 ════════════════════════════════════════════════════════
                                                                 
-                                                                👉 Enter the meat you would like:
-                                                                """);
+                                                                
+                                                                
+                 """
+        );
 
         int input = Console.promptForInt("""
-                Please select your Cheese type:
+                👉 Enter the meat you would like:
                 """);
 
 
         switch (input) {
             case 1:
-                cheeseOnOrder.add("American");
+                cheeseOnOrder.add(Cheeses.American);
                 break;
             case 2:
-                cheeseOnOrder.add("Provolone");
+                cheeseOnOrder.add(Cheeses.Provolone);
                 break;
             case 3:
-                cheeseOnOrder.add("Cheddar");
+                cheeseOnOrder.add(Cheeses.Cheddar);
                 break;
             case 4:
-                cheeseOnOrder.add("Swiss");
+                cheeseOnOrder.add(Cheeses.Swiss);
                 break;
             case 5:
-                cheeseOnOrder.add("Paneer");
+                cheeseOnOrder.add(Cheeses.Paneer);
                 break;
             default:
                 break;
@@ -528,7 +557,7 @@ public class AddSandwichScreen <T>{
 
 
         while (true){
-            int inputExtra = Console.promptForInt("""
+            System.out.println("""
                                                                 ╔══════════════════════════════════════════════════════╗
                                                                 ║              EXTRA CHEESE OPTIONS 🧀                 ║
                                                                 ╚══════════════════════════════════════════════════════╝
@@ -550,30 +579,32 @@ public class AddSandwichScreen <T>{
                                                                 
                                                                 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
                                                                 
-                                                            👉 If you would like extra cheese, please select an option:
+                                                            
                    
                 """);
+            int inputExtra = Console.promptForInt("👉 If you would like extra cheese, please select an option: ");
             if(inputExtra == 0){
                 break;
             }
-            switch (inputExtra) {
-                case 1:
-                    cheeseOnOrder.add("American");
-                    break;
-                case 2:
-                    cheeseOnOrder.add("Provolone");
-                    break;
-                case 3:
-                    cheeseOnOrder.add("Chedder");
-                    break;
-                case 4:
-                    cheeseOnOrder.add("Swiss");
-                    break;
-                case 5:
-                    cheeseOnOrder.add("Paneer");
-                    break;
-                default:
-                    break;
+            switch (inputExtra){
+
+            case 1:
+                cheeseOnOrder.add(Cheeses.American);
+                break;
+            case 2:
+                cheeseOnOrder.add(Cheeses.Provolone);
+                break;
+            case 3:
+                cheeseOnOrder.add(Cheeses.Cheddar);
+                break;
+            case 4:
+                cheeseOnOrder.add(Cheeses.Swiss);
+                break;
+            case 5:
+                cheeseOnOrder.add(Cheeses.Paneer);
+                break;
+            default:
+                break;
 
             }
         }
@@ -583,4 +614,3 @@ public class AddSandwichScreen <T>{
 
 
 }
-

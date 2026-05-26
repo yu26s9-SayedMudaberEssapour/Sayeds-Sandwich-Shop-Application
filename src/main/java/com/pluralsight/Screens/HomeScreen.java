@@ -12,7 +12,7 @@ public class HomeScreen <T>{
 
 
 
-    public void StartOrder(){
+    public static void StartOrder(){
 
         while(true){
             System.out.println("""
