@@ -4,6 +4,12 @@ import com.pluralsight.ItemsInTheShop.OrderItems;
 import com.pluralsight.ui.Console;
 import com.pluralsight.Screens.HomeScreen;
 
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class CheckOut extends OrderItems {
 
     //figure out how to implement this class.
@@ -21,36 +27,70 @@ public class CheckOut extends OrderItems {
 
 
         System.out.println("""
-                                        ╔══════════════════════════════════════════════════════╗
-                                        ║                    CHECKOUT 💳                      ║
-                                        ╚══════════════════════════════════════════════════════╝
-
-                                        Please review your order before continuing.
-
-                                        ════════════════════════════════════════════════════════
-
-                                           [1] ✅ Confirm Order
-                                           [2] ❌ Cancel Order
-
-                                        ════════════════════════════════════════════════════════
-
-                                        Enter your choice 👇.
+                                                                ╔══════════════════════════════════════════════════════╗
+                                                                ║                    CHECKOUT 💳                       ║
+                                                                ╚══════════════════════════════════════════════════════╝
+                        
+                                                                Please review your order before continuing.
+                        
+                                                                ════════════════════════════════════════════════════════
+                        
+                                                                   [1] ✅ Confirm Order
+                                                                   [2] ❌ Cancel Order
+                        
+                                                                ════════════════════════════════════════════════════════
+                        
+                                                                Enter your choice 👇.
                 """);
 
         int input  = Console.promptForInt("Please enter your response: ");
 
         switch (input){
             case 1:
-                System.out.println("you have checked out");
+                checkOutReceipt();
                 break;
             case 2:
-                System.out.println("you have deleted order and returned back home");
-                //currentOrder.clear();
+                System.out.println("you have deleted order, returning to Home Screen");
+                currentOrder.clear();
                 break;
             default:
                 break;
         }
 
+    }
+
+    public static void checkOutReceipt(){
+        //yyyyMMdd-hhmmss.txt - i.e. 20230329-121523.txt)
+        try{
+            LocalDateTime date = LocalDateTime.now();
+
+            DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("yyyyMMdd-hhmmss");
+
+            String formattedDate = date.format(myFormatObj);
+
+
+            FileWriter fr = new FileWriter("src/main/java/com/pluralsight/Receipt/" + formattedDate + ".txt");
+
+            fr.write("""
+                                    ╔══════════════════════════════════════════════════════╗
+                                    ║                 Sayed's Sandwich Shop                ║
+                                    ║                 2245 8th st Washington DC            ║
+                                    ║                 555-989-4532                         ║
+                                    ╚══════════════════════════════════════════════════════╝
+                    
+                    """
+
+            );
+
+            fr.write(currentOrder.keySet().toString() + "\n");
+            fr.write("Total:  " + String.valueOf(totalPrice));
+
+
+            fr.close();
+        }
+        catch (IOException e){
+            e.getMessage();
+        }
     }
 
 }

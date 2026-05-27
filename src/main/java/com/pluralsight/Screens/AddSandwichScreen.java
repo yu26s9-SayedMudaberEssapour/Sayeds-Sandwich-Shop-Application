@@ -19,35 +19,27 @@ public class AddSandwichScreen extends OrderItems {
     //3rd Screen here
     public static void AddSandwich() {
 
-        //(1)first ask the customer for their bread type
-        String breadInput = TypeOfBread();
-
-        //(2)ask the customer for the size of the sandwich
+        //(1)ask the customer for the size of the sandwich
         String SizeOfSandwich = sandwichSize();
-
-        //(3)list of meat
-        ArrayList<Meats> meat = typeOfMeat();
-
-        //(4)list of Cheese
-        ArrayList<Cheeses> cheese = typeOfCheese();
-
-        //(5)regular toppings
-        ArrayList<RegularToppings> regularTopping = regularToppings();
-
-        //(6)list of souses
-        ArrayList<Sauses> Sauses = listOfSouses();
-
-        //(7)ask the user if they want sandwich toasted
+        //(2)first ask the customer for their bread type
+        String breadInput = TypeOfBread();
+        //(3)ask the user if they want sandwich toasted
         String shouldToast = shouldToast();
+        //(4)list of meat
+        ArrayList<ListOfMeats> meat = typeOfMeat();
+        //(5)list of Cheese
+        ArrayList<ListOfCheeses> cheese = typeOfCheese();
+        //(6)regular toppings
+        ArrayList<RegularToppings> regularTopping = regularToppings();
+        //(7)list of souses
+        ArrayList<Sauses> Sauces = listOfSouses();
 
 
-        //this is how the
-        //String sandwichSize, String typeOfBread, ArrayList<Meats> meat, ArrayList<Cheeses> cheese, ArrayList<RegularToppings> toppings, ArrayList<Sauses> sauses, boolean shouldToast
-        Sandwich sandwich = new Sandwich(SizeOfSandwich, breadInput, meat,  cheese, regularTopping,Sauses, shouldToast);
-        System.out.println("price of this sandwich is " + sandwich.getPrice());
+        Sandwich sandwich = new Sandwich(SizeOfSandwich, breadInput, meat,  cheese, regularTopping,Sauces, shouldToast);
 
-        //should be able to add sandwich to the current order.
+        //Should be able to add sandwich to the current order.
         StringBuilder sb = new StringBuilder();
+
         sb.append(sandwich.getSandwichSize());
         sb.append(sandwich.getTypeOfBread());
         sb.append( sandwich.isShouldToast());
@@ -55,11 +47,10 @@ public class AddSandwichScreen extends OrderItems {
         sb.append(sandwich.getMeat());
         sb.append(sandwich.getCheese());
         sb.append(sandwich.getToppings());
-        sb.append(sandwich.getPrice());
+        sb.append(sandwich.getWholeSandwichPrice());
 
-        totalPrice += sandwich.getPrice();
+        totalPrice += sandwich.getWholeSandwichPrice();
         currentOrder.put(sandwich, sb.toString());
-
 
 
     }
@@ -197,7 +188,6 @@ public class AddSandwichScreen extends OrderItems {
     }
 
 
-
     //--------------------------listOfSauses----------------------------------
     /**
      * This method takes as many Souses as the user would like to add and returns
@@ -281,8 +271,6 @@ public class AddSandwichScreen extends OrderItems {
 
 
     }
-
-
 
 
 
@@ -376,14 +364,12 @@ public class AddSandwichScreen extends OrderItems {
 
 
 
-
-
     //--------------------------TypeOfMeat----------------------------------
     //give the ability to customers to select multiple meats
     //meat should be type meat
-    private static ArrayList<Meats> typeOfMeat(){
+    private static ArrayList<ListOfMeats> typeOfMeat(){
 
-        ArrayList<Meats> meatOnOrder = new ArrayList<>();
+        ArrayList<ListOfMeats> meatOnOrder = new ArrayList<>();
 
 
         System.out.println("""
@@ -415,22 +401,22 @@ public class AddSandwichScreen extends OrderItems {
 
         switch (input) {
             case 1:
-                meatOnOrder.add(Meats.Steak);
+                meatOnOrder.add(ListOfMeats.Steak);
                 break;
             case 2:
-                meatOnOrder.add(Meats.Ham);
+                meatOnOrder.add(ListOfMeats.Ham);
                 break;
             case 3:
-                meatOnOrder.add(Meats.Salami);
+                meatOnOrder.add(ListOfMeats.Salami);
                 break;
             case 4:
-                meatOnOrder.add(Meats.Roastbeef);
+                meatOnOrder.add(ListOfMeats.Roastbeef);
                 break;
             case 5:
-                meatOnOrder.add(Meats.Chicken);
+                meatOnOrder.add(ListOfMeats.Chicken);
                 break;
             case 6:
-                meatOnOrder.add(Meats.Bacon);
+                meatOnOrder.add(ListOfMeats.Bacon);
                 break;
             default:
                 break;
@@ -473,22 +459,22 @@ public class AddSandwichScreen extends OrderItems {
             }
             switch (inputExtra){
                 case 1:
-                    meatOnOrder.add(Meats.Steak);
+                    meatOnOrder.add(ListOfMeats.Steak);
                     break;
                 case 2:
-                    meatOnOrder.add(Meats.Ham);
+                    meatOnOrder.add(ListOfMeats.Ham);
                     break;
                 case 3:
-                    meatOnOrder.add(Meats.Salami);
+                    meatOnOrder.add(ListOfMeats.Salami);
                     break;
                 case 4:
-                    meatOnOrder.add(Meats.Roastbeef);
+                    meatOnOrder.add(ListOfMeats.Roastbeef);
                     break;
                 case 5:
-                    meatOnOrder.add(Meats.Chicken);
+                    meatOnOrder.add(ListOfMeats.Chicken);
                     break;
                 case 6:
-                    meatOnOrder.add(Meats.Bacon);
+                    meatOnOrder.add(ListOfMeats.Bacon);
                     break;
                 default:
                     break;
@@ -501,8 +487,8 @@ public class AddSandwichScreen extends OrderItems {
 
     //give the ability to customers to select multiple Cheese
     //should be able to add many different types of cheese
-    private static ArrayList<Cheeses> typeOfCheese(){
-        ArrayList<Cheeses> cheeseOnOrder = new ArrayList<>();
+    private static ArrayList<ListOfCheeses> typeOfCheese(){
+        ArrayList<ListOfCheeses> cheeseOnOrder = new ArrayList<>();
 
 
         System.out.println("""
@@ -535,19 +521,19 @@ public class AddSandwichScreen extends OrderItems {
 
         switch (input) {
             case 1:
-                cheeseOnOrder.add(Cheeses.American);
+                cheeseOnOrder.add(ListOfCheeses.American);
                 break;
             case 2:
-                cheeseOnOrder.add(Cheeses.Provolone);
+                cheeseOnOrder.add(ListOfCheeses.Provolone);
                 break;
             case 3:
-                cheeseOnOrder.add(Cheeses.Cheddar);
+                cheeseOnOrder.add(ListOfCheeses.Cheddar);
                 break;
             case 4:
-                cheeseOnOrder.add(Cheeses.Swiss);
+                cheeseOnOrder.add(ListOfCheeses.Swiss);
                 break;
             case 5:
-                cheeseOnOrder.add(Cheeses.Paneer);
+                cheeseOnOrder.add(ListOfCheeses.Paneer);
                 break;
             default:
                 break;
@@ -589,19 +575,19 @@ public class AddSandwichScreen extends OrderItems {
             switch (inputExtra){
 
             case 1:
-                cheeseOnOrder.add(Cheeses.American);
+                cheeseOnOrder.add(ListOfCheeses.American);
                 break;
             case 2:
-                cheeseOnOrder.add(Cheeses.Provolone);
+                cheeseOnOrder.add(ListOfCheeses.Provolone);
                 break;
             case 3:
-                cheeseOnOrder.add(Cheeses.Cheddar);
+                cheeseOnOrder.add(ListOfCheeses.Cheddar);
                 break;
             case 4:
-                cheeseOnOrder.add(Cheeses.Swiss);
+                cheeseOnOrder.add(ListOfCheeses.Swiss);
                 break;
             case 5:
-                cheeseOnOrder.add(Cheeses.Paneer);
+                cheeseOnOrder.add(ListOfCheeses.Paneer);
                 break;
             default:
                 break;

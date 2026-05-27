@@ -7,6 +7,20 @@ import com.pluralsight.ui.Console;
 public class AddChips extends OrderItems {
 
     public static void addChips(){
+
+        Chips chips = new Chips(kindOfChips());
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(chips.getTypeOfChips());
+        sb.append(chips.getPrice());
+
+        totalPrice += chips.getPrice();
+        currentOrder.put(chips, sb.toString());
+    }
+
+
+    public static String kindOfChips(){
+
         System.out.println("""
                
                                                                 ╔══════════════════════════════════════════════════════╗
@@ -68,19 +82,11 @@ public class AddChips extends OrderItems {
                 break;
         }
 
-        Chips chips = new Chips(result);
-
-        System.out.println(chips.getPrice());
-
-
-
-
-        StringBuilder sb = new StringBuilder();
-        sb.append(chips.getTypeOfChips());
-        sb.append(chips.getPrice());
-
-        totalPrice += chips.getPrice();
-        currentOrder.put(chips, sb.toString());
+        return result;
     }
+
+
+
+
 
 }

@@ -54,18 +54,25 @@ public class Drink extends OrderItems{
     }
 
 
+    //check this method
+    private String line(String label, String value, double price) {
+        return String.format("   %-12s %-30s $%.2f", label, value, price);
+    }
+
     @Override
     public String toString() {
         return """
-    ===== Drink =====
-    Size of Drink: %s
-    Flavor of Drink: %s
-    Price: $%.2f
-    
-    """.formatted(
-                size,
-                flavor,
-                getPrice()
-        );
+                                                                ╔══════════════════════════════════════════════════════╗
+                                                                ║                  🥤 Drink DETAILS                    ║
+                                                                ╚══════════════════════════════════════════════════════╝
+
+                                                                """
+                                                                + line("📏 Size:", String.valueOf(size), getPrice()) + "\n"
+                                                                + line("\uD83E\uDD64 Flavor:", String.valueOf(flavor), 0.00) + "\n"
+                                                                + line("⚙\uFE0F Customize:", String.valueOf(extras), 0.00) + "\n\n"
+                                                                + String.format("   💲 %-42s $%.2f", "TOTAL:", getPrice()) + "\n"
+                + """
+                                                                ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                                                                """;
     }
 }

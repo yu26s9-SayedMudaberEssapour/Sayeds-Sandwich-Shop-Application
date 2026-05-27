@@ -16,6 +16,8 @@ public class UserInterface {
         HomeScreen hs = new HomeScreen();
 
         hs.StartOrder();
+        CheckOut c = new CheckOut();
+        //c.checkOutReceipt();
 
         //CheckOut c = new CheckOut();
         //c.checkOut();

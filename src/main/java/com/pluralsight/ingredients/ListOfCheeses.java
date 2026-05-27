@@ -1,6 +1,6 @@
 package com.pluralsight.ingredients;
 
-public enum Cheeses {
+public enum ListOfCheeses {
     American,
     Provolone,
     Cheddar,

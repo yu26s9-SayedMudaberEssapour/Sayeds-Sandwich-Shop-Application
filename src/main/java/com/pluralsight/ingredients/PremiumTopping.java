@@ -1,11 +1,13 @@
 package com.pluralsight.ingredients;
 
-public interface PremiumTopping {
+public interface PremiumTopping <T>{
 
 
-    public double priceForRegular(int size);
+    public double getPriceForRegular(int size);
 
-    public float priceForExtra(int size);
+    public float getPriceForExtra(int size);
+
+    public T getType(T type);
 
 
 

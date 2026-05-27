@@ -21,17 +21,25 @@ public class Chips extends OrderItems{
         return 1.50;
     }
 
+    //check this method
+    private String line(String label, String value, double price) {
+        return String.format("   %-12s %-30s $%.2f", label, value, price);
+    }
+
     @Override
     public String toString() {
-        return """
-    ===== Chips =====
-    Type of Chips: %s
-    Price: $%.2f
-    
-    """.formatted(
-                typeOfChips,
-                getPrice()
-        );
+        return                                                  """
+                                                                ╔══════════════════════════════════════════════════════╗
+                                                                ║                 🥪 SANDWICH DETAILS                  ║
+                                                                ╚══════════════════════════════════════════════════════╝
+
+                                                                """
+                                                                + line("Type:", String.valueOf(typeOfChips), getPrice())
+                                                                + line("Type:", String.valueOf(typeOfChips), 0.00) + "\n\n"
+                                                                + String.format("   💲 %-42s $%.2f", "TOTAL:", getPrice()) + "\n"
+                                                                + """
+                                                                ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                                                                """;
     }
 
 }

@@ -1,6 +1,6 @@
 package com.pluralsight.ingredients;
 
-public enum Meats {
+public enum ListOfMeats {
     //you can add values on enums
     Steak,
     Ham,
