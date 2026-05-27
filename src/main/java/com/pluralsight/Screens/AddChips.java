@@ -1,10 +1,10 @@
 package com.pluralsight.Screens;
 
 import com.pluralsight.ItemsInTheShop.Chips;
-import com.pluralsight.ItemsInTheShop.OrderItems;
+import com.pluralsight.ItemsInTheShop.OrderItem;
 import com.pluralsight.ui.Console;
 
-public class AddChips extends OrderItems {
+public class AddChips extends OrderItem {
 
     public static void addChips(){
 

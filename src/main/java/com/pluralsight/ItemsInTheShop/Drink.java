@@ -1,6 +1,6 @@
 package com.pluralsight.ItemsInTheShop;
 
-public class Drink extends OrderItems{
+public class Drink extends OrderItem {
     private String size; //small, medium, large
     private String flavor; //Coke, Fanta, Sprite, RootBeer etc...
     private String extras;

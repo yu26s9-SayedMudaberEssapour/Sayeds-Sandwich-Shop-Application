@@ -1,16 +1,14 @@
 package com.pluralsight.Screens;
 
-import com.pluralsight.ItemsInTheShop.OrderItems;
+import com.pluralsight.ItemsInTheShop.OrderItem;
 import com.pluralsight.ui.Console;
-import com.pluralsight.Screens.HomeScreen;
 
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class CheckOut extends OrderItems {
+public class CheckOut extends OrderItem {
 
     //figure out how to implement this class.
 

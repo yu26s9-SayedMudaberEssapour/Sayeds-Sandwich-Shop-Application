@@ -1,6 +1,6 @@
 package com.pluralsight.ItemsInTheShop;
 
-public class Chips extends OrderItems{
+public class Chips extends OrderItem {
     private String typeOfChips;
 
     double price;

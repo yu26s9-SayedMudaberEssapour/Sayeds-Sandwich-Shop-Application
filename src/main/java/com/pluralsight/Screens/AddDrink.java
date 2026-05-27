@@ -1,10 +1,10 @@
 package com.pluralsight.Screens;
 
 import com.pluralsight.ItemsInTheShop.Drink;
-import com.pluralsight.ItemsInTheShop.OrderItems;
+import com.pluralsight.ItemsInTheShop.OrderItem;
 import com.pluralsight.ui.Console;
 
-public class AddDrink extends OrderItems {
+public class AddDrink extends OrderItem {
 
     /**
      * This method will be in charge of adding the drink to the order of the customer.

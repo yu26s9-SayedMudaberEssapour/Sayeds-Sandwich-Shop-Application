@@ -1,6 +1,6 @@
 package com.pluralsight.Screens;
 
-import com.pluralsight.ItemsInTheShop.OrderItems;
+import com.pluralsight.ItemsInTheShop.OrderItem;
 import com.pluralsight.ItemsInTheShop.Sandwich;
 import com.pluralsight.ingredients.RegularToppings;
 import com.pluralsight.ingredients.Sauses;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class AddSandwichScreen extends OrderItems {
+public class AddSandwichScreen extends OrderItem {
 
     //__________________Add Sandwich______________________________
 

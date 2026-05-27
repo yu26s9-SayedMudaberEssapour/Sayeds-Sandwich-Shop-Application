@@ -7,7 +7,7 @@ import com.pluralsight.ingredients.Sauses;
 
 import java.util.ArrayList;
 
-public class Sandwich extends OrderItems {
+public class Sandwich extends OrderItem {
 
     private String sandwichSize; // ask the user for 4" 8" 12"
     private String typeOfBread;
@@ -220,7 +220,9 @@ public class Sandwich extends OrderItems {
         return String.format("   %-12s %-30s $%.2f", label, value, price);
     }
 
-
+ public String toRecieptString(){
+        return null;
+ }
 
 
     @Override
