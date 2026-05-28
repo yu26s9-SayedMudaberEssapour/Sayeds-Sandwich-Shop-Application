@@ -1,0 +1,16 @@
+package com.pluralsight.enums;
+
+public enum ChipFlavor {
+
+
+    CLASSIC_LAYS_ORIGINAL,
+
+    BBQ_CHIPS,
+    SOUR_CREAM_AND_ONION,
+    SALT_AND_VINEGAR,
+    DORITOS_NACHO_CHEESE,
+    DORITOS_COOL_RANCH,
+    CHEETOS_CRUNCHY,
+    RUFFLES_CHEDDAR_AND_SOUR_CREAM,
+
+}
