@@ -1,0 +1,18 @@
+╔══════════════════════════════════════════════════════╗
+║                 Sayed's Sandwich Shop                ║
+║                 2245 8th st Washington DC            ║
+║                 555-989-4532                         ║
+╚══════════════════════════════════════════════════════╝
+
+
+   Sandwich:    Large, WhiteBread            $  8.50
+     ↳ Toasted: true                        $0.00
+     • Meat:    Steak                      $  3.00
+     • Meat:    Chicken                    $  1.50
+     • Cheese:  Cheddar                    $  2.25
+     • RegularTopping: Lettuce                    $  0.00
+     • RegularTopping: Onion                      $  0.00
+     • RegularTopping: Pepper                     $  0.00
+     • Sauces:  Mayo                       $  0.00
+
+Total:  15.25

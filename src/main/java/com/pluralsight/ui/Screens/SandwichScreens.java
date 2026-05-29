@@ -10,23 +10,25 @@ import com.pluralsight.model.order.OrderItem;
 
 import java.util.ArrayList;
 
+/**
+ * Handles the step-by-step user interface menus for configuring and assembling a custom sandwich.
+ */
 public class SandwichScreens {
 
-    // --- Add Sandwich (3rd Screen) ---
+    /**
+     * Orchestrates the full creation sequence of a custom sandwich item from size choice to sauces.
+     * @return a fully configured custom Sandwich object populated with user selections
+     */
     public static Sandwich AddSandwich() {
-        // (1) ask the customer for the size of the sandwich
         String SizeOfSandwich = sandwichSize();
         String sizeofSandwich = SizeOfSandwich;
 
-        // (2) first ask the customer for their bread type
         Bread breadInput = SelectBread();
 
-        // (3) ask the user if they want sandwich toasted
         String shouldToast = shouldToast();
 
         Sandwich sandwich = new Sandwich(SizeOfSandwich, breadInput, shouldToast);
 
-        // (4) list of meat
         ArrayList<MeatTypes> listOfMeats = selectMeat(sizeofSandwich);
 
         for (int i = 0; i < listOfMeats.size(); i++) {
@@ -37,7 +39,6 @@ public class SandwichScreens {
             }
         }
 
-        // (5) list of Cheese
         ArrayList<CheeseTypes> listOfCheese = selectCheese(sizeofSandwich);
 
         for (int i = 0; i < listOfCheese.size(); i++) {
@@ -48,55 +49,62 @@ public class SandwichScreens {
             }
         }
 
-        // (6) regular toppings
         selectRegularTopping().forEach(topping -> sandwich.addTopping(new RegularTopping(topping)));
 
-        // (7) list of sauces
         selectSauce().forEach(sauce -> sandwich.addTopping(new Sauces(sauce)));
 
         System.out.println(sandwich.getDescription());
 
-
         return sandwich;
     }
 
-
-
-    // --- Should Toast ---
+    /**
+     * Displays options and tracks user input for whether the sandwich should be toasted.
+     * @return a "Yes" or "No" preference string
+     */
     private static String shouldToast() {
         boolean result = false;
+        boolean choiceMade = false;
 
-        System.out.println("""
-            ╔══════════════════════════════════════════════════════╗
-            ║               TOAST YOUR SANDWICH 🔥                 ║
-            ╚══════════════════════════════════════════════════════╝
-            
-            Make it warm, crispy, and extra delicious!
-            
-            ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-            
-            🔥 WOULD YOU LIKE YOUR SANDWICH TOASTED?
-            
-               [1] Yes — Toast my sandwich 🔥
-               [2] No  — Keep it fresh 🥗
-            
-            ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-            """);
-        int shouldToast = Console.promptForInt("👉 Enter your choice (1/2): ");
+        while (!choiceMade) {
+            System.out.println("""
+                ╔══════════════════════════════════════════════════════╗
+                ║               TOAST YOUR SANDWICH 🔥                 ║
+                ╚══════════════════════════════════════════════════════╝
+                
+                Make it warm, crispy, and extra delicious!
+                
+                ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                
+                🔥 WOULD YOU LIKE YOUR SANDWICH TOASTED?
+                
+                   [1] Yes — Toast my sandwich 🔥
+                   [2] No  — Keep it fresh 🥗
+                
+                ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                """);
+            int shouldToast = Console.promptForInt("👉 Enter your choice (1/2): ");
 
-        switch (shouldToast) {
-            case 1:
-                result = true;
-                break;
-            case 2:
-                break;
-            default:
-                break;
+            switch (shouldToast) {
+                case 1:
+                    result = true;
+                    choiceMade = true;
+                    break;
+                case 2:
+                    choiceMade = true;
+                    break;
+                default:
+                    System.out.println("⚠️ Invalid choice. Please pick [1] or [2].\n");
+                    break;
+            }
         }
         return (!result) ? ("No") : ("Yes");
     }
 
-    // --- Sandwich Size ---
+    /**
+     * Displays size configurations and loops until a valid menu option is resolved.
+     * @return a size string designation ("Small", "Medium", "Large")
+     */
     public static String sandwichSize() {
         String result = "";
         int sizeOfSandwich = 0;
@@ -130,49 +138,60 @@ public class SandwichScreens {
                     result = "Large";
                     break;
                 default:
+                    System.out.println("⚠️ Invalid selection. Please choose [1], [2], or [3].\n");
                     break;
             }
             if ((sizeOfSandwich == 1) || (sizeOfSandwich == 2) || (sizeOfSandwich == 3)) {
                 break;
             }
-        } while ((sizeOfSandwich < 1) && (sizeOfSandwich > 3));
+        } while (true);
 
         return result;
     }
 
-    // --- Select Bread ---
+    /**
+     * Displays structural base choices and loops until a valid bread selection is finalized.
+     * @return a constructed Bread object matching structural selections
+     */
     public static Bread SelectBread() {
         BreadType breadType = null;
-        System.out.println("""
-                ╔══════════════════════════════════════════════════════╗
-                ║                 SELECT YOUR BREAD 🍞                 ║
-                ╚══════════════════════════════════════════════════════╝
-                
-                Freshly baked and ready for your sandwich!
-                
-                ════════════════════════════════════════════════════════
-                
-                🍞 BREAD OPTIONS
-                   [1] White Bread 🤍
-                   [2] Wheat Bread 🤎
-                   [3] Rye Bread   🌾
-                   [4] Wrap        🌯
-                
-                ════════════════════════════════════════════════════════
-                """);
-        int input = Console.promptForInt("👉 Enter your Bread choice: ");
 
-        switch (input) {
-            case 1 -> breadType = BreadType.WhiteBread;
-            case 2 -> breadType = BreadType.WheatBread;
-            case 3 -> breadType = BreadType.RyeBread;
-            case 4 -> breadType = BreadType.Wrap;
+        while (breadType == null) {
+            System.out.println("""
+                    ╔══════════════════════════════════════════════════════╗
+                    ║                 SELECT YOUR BREAD 🍞                 ║
+                    ╚══════════════════════════════════════════════════════╝
+                    
+                    Freshly baked and ready for your sandwich!
+                    
+                    ════════════════════════════════════════════════════════
+                    
+                    🍞 BREAD OPTIONS
+                       [1] White Bread 🤍
+                       [2] Wheat Bread 🤎
+                       [3] Rye Bread   🌾
+                       [4] Wrap        🌯
+                    
+                    ════════════════════════════════════════════════════════
+                    """);
+            int input = Console.promptForInt("👉 Enter your Bread choice: ");
+
+            switch (input) {
+                case 1 -> breadType = BreadType.WhiteBread;
+                case 2 -> breadType = BreadType.WheatBread;
+                case 3 -> breadType = BreadType.RyeBread;
+                case 4 -> breadType = BreadType.Wrap;
+                default -> System.out.println("⚠️ Invalid selection. Please pick a number from 1 to 4.\n");
+            }
         }
 
         return new Bread(breadType);
     }
 
-    // --- Select Sauce ---
+    /**
+     * Accumulates selected sauce options until explicit termination via menu commands.
+     * @return a tracking list containing designated sauce variations
+     */
     private static ArrayList<SauceTypes> selectSauce() {
         ArrayList<SauceTypes> sauceList = new ArrayList<>();
 
@@ -212,13 +231,17 @@ public class SandwichScreens {
                 case 5 -> sauceList.add(SauceTypes.Thousandisland);
                 case 6 -> sauceList.add(SauceTypes.Vinaigrette);
                 case 7 -> sauceList.clear();
+                default -> System.out.println("⚠️ Invalid option. Please select from 0 to 7.\n");
             }
         }
 
         return sauceList;
     }
 
-    // --- Select Regular Topping ---
+    /**
+     * Accumulates specified fresh vegetable toppings until explicit termination via menu commands.
+     * @return a tracking list containing chosen vegetable variations
+     */
     private static ArrayList<RegularToppingsType> selectRegularTopping() {
         ArrayList<RegularToppingsType> regularTopping = new ArrayList<>();
 
@@ -260,13 +283,18 @@ public class SandwichScreens {
                 case 6 -> regularTopping.add(RegularToppingsType.Pickles);
                 case 7 -> regularTopping.add(RegularToppingsType.Guacamole);
                 case 8 -> regularTopping.add(RegularToppingsType.Mushrooms);
+                default -> System.out.println("⚠️ Invalid option. Please select from 0 to 8.\n");
             }
         }
 
         return regularTopping;
     }
 
-    // --- Select Meat ---
+    /**
+     * Accumulates chosen premium meat selections until explicit termination via menu commands.
+     * @param sizeOfSandwich the designated scale modifier matching base metrics
+     * @return a tracking list containing premium meat variants
+     */
     private static ArrayList<MeatTypes> selectMeat(String sizeOfSandwich) {
         ArrayList<MeatTypes> meatList = new ArrayList<>();
 
@@ -322,6 +350,7 @@ public class SandwichScreens {
                     meatList.add(MeatTypes.Bacon);
                     break;
                 default:
+                    System.out.println("⚠️ Invalid option. Please select from 0 to 6.\n");
                     break;
             }
         }
@@ -329,7 +358,11 @@ public class SandwichScreens {
         return meatList;
     }
 
-    // --- Select Cheese ---
+    /**
+     * Accumulates premium cheese variants until explicit termination via menu commands.
+     * @param sizeOfSandwich the structural size context used for billing metrics
+     * @return a tracking list containing premium cheese selections
+     */
     private static ArrayList<CheeseTypes> selectCheese(String sizeOfSandwich) {
         ArrayList<CheeseTypes> cheeseList = new ArrayList<>();
         double extraCounter = 0;
@@ -382,6 +415,7 @@ public class SandwichScreens {
                     cheeseList.add(CheeseTypes.Paneer);
                     break;
                 default:
+                    System.out.println("⚠️ Invalid option. Please select from 0 to 5.\n");
                     break;
             }
         }

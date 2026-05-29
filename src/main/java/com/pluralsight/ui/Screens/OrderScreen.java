@@ -1,6 +1,7 @@
 package com.pluralsight.ui.Screens;
 
 import com.pluralsight.model.order.Order;
+import com.pluralsight.model.order.OrderItem;
 import com.pluralsight.ui.Console;
 
 import static com.pluralsight.ui.Screens.ChipScreens.addChips;
@@ -9,8 +10,14 @@ import static com.pluralsight.ui.Screens.SandwichScreens.AddSandwich;
 import static com.pluralsight.ui.Screens.CheckOutScreens.checkOut;
 import static com.pluralsight.ui.Screens.SpecialSandwichScreens.addSpecialSandwich;
 
+/**
+ * Handles the main order dashboard menu loop where users assemble components of their meal.
+ */
 public class OrderScreen extends Order {
 
+    /**
+     * Runs the continuous menu selection display loop for managing core item additions and cancellations.
+     */
     public static void orderScreen() {
 
         while (true) {
@@ -44,15 +51,16 @@ public class OrderScreen extends Order {
                     return;
                 }
                 case "5" -> {
-                    // here I should delete everything.
+                    // Fix: Clear all selected items globally to completely wipe out the tracking list
+                    getItems().clear();
                     System.out.println("""
                         Your Order Has been Canceled 😞
                         Returning back to Home Screen 🚶‍♂️
                         """);
-                    return; // this should return me to home page
+                    return;
                 }
                 case "6" -> order.addItem(addSpecialSandwich());
-                default -> System.out.println("⚠️ Invalid option. Please select a number from 1 to 5.\n");
+                default -> System.out.println("⚠️ Invalid option. Please select a number from 1 to 6.\n");
             }
         }
     }

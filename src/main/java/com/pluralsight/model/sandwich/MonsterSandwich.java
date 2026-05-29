@@ -1,28 +1,25 @@
 package com.pluralsight.model.sandwich;
 
-import com.pluralsight.enums.*;
+import com.pluralsight.enums.BreadType;
+
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Represents a pre-configured, specialty signature sandwich.
- */
-public class SayedSignitureSandwich extends Sandwich {
-
+public class MonsterSandwich extends Sandwich{
     // --- Fields ---
-    private final String Name = "Sayed's-Signature-Sandwich";
+    private final String Name = "Monster-Sandwich";
     private final boolean shouldToast = true;
     private final String sandwichSize = "Large";
     private List<Toppings> toppingsList;
 
-    // --- Constructor ---
-    /**
-     * Constructs a default Large signature sandwich on White bread.
-     */
-    public SayedSignitureSandwich() {
+    public MonsterSandwich() {
         super("Large", new Bread(BreadType.WhiteBread), "Yes");
         this.toppingsList = new ArrayList<>();
+
+
+
     }
+
 
     // --- Getters ---
     /**
@@ -137,7 +134,7 @@ public class SayedSignitureSandwich extends Sandwich {
 
         return """
             ╔══════════════════════════════════════════════════════╗
-            ║            👑 SIGNATURE SANDWICH DETAILS             ║
+            ║            👹 Monster SANDWICH DETAILS               ║
             ╚══════════════════════════════════════════════════════╝
             """
                 + line("📏 Size:", sandwichSize, priceOfSize()) + "\n"
@@ -186,4 +183,6 @@ public class SayedSignitureSandwich extends Sandwich {
     private String line(String label, String value, double price) {
         return String.format("   %-12s %-30s $%.2f", label, value, price);
     }
+
+
 }

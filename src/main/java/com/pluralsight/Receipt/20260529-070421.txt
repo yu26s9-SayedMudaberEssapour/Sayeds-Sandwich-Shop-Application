@@ -1,0 +1,45 @@
+╔══════════════════════════════════════════════════════╗
+║                 Sayed's Sandwich Shop                ║
+║                 2245 8th st Washington DC            ║
+║                 555-989-4532                         ║
+╚══════════════════════════════════════════════════════╝
+
+
+   Sandwich:    Medium, WheatBread           $  7.00
+     ↳ Toasted: Yes                         $0.00
+     • Meat:    Chicken                    $  2.00
+     • Meat:    Bacon                      $  1.00
+     • Cheese:  Provolone                  $  1.50
+     • Cheese:  Cheddar                    $  0.60
+     • RegularTopping: Pepper                     $  0.00
+     • RegularTopping: Jalapeños                  $  0.00
+     • Sauces:  Ketchup                    $  0.00
+     • Sauces:  Ranch                      $  0.00
+
+   Drink:       Medium DR_PEPPER (❄️  Extra Ice) $  2.50
+
+   Chips:       BBQ_CHIPS                    $  1.50
+
+   Sandwich:    Large, WhiteBread            $  8.50
+     ↳ Toasted: true                        $0.00
+     • Meat:    Ham                        $  3.00
+     • Meat:    Salami                     $  1.50
+     • Cheese:  Provolone                  $  2.25
+     • Cheese:  Cheddar                    $  0.90
+     • RegularTopping: Lettuce                    $  0.00
+     • RegularTopping: Pepper                     $  0.00
+     • Sauces:  Mayo                       $  0.00
+     • Sauces:  Mustard                    $  0.00
+
+   Sandwich:    Large, WhiteBread            $  8.50
+     ↳ Toasted: true                        $0.00
+     • Meat:    Ham                        $  3.00
+     • Meat:    Salami                     $  1.50
+     • Cheese:  Provolone                  $  2.25
+     • Cheese:  Cheddar                    $  0.90
+     • RegularTopping: Jalapeños                  $  0.00
+     • RegularTopping: Pepper                     $  0.00
+     • Sauces:  Ketchup                    $  0.00
+     • Sauces:  Mustard                    $  0.00
+
+Total:  48.4

@@ -1,0 +1,14 @@
+╔══════════════════════════════════════════════════════╗
+║                 Sayed's Sandwich Shop                ║
+║                 2245 8th st Washington DC            ║
+║                 555-989-4532                         ║
+╚══════════════════════════════════════════════════════╝
+
+
+   Sandwich:    Large, null                  $  8.50
+     ↳ Toasted: true                        $0.00
+
+   Sandwich:    Large, null                  $  8.50
+     ↳ Toasted: true                        $0.00
+
+Total:  17.0

@@ -3,8 +3,14 @@ package com.pluralsight.ui.Screens;
 import com.pluralsight.ui.Console;
 import static com.pluralsight.ui.Screens.OrderScreen.orderScreen;
 
+/**
+ * Handles the main entry point screen for the application's user interface.
+ */
 public class HomeScreen {
 
+    /**
+     * Launches the home menu loop, welcoming users and directing them to start an order or exit.
+     */
     public static void StartOrder() {
 
         while (true) {

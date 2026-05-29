@@ -1,0 +1,49 @@
+╔══════════════════════════════════════════════════════╗
+║                 Sayed's Sandwich Shop                ║
+║                 2245 8th st Washington DC            ║
+║                 555-989-4532                         ║
+╚══════════════════════════════════════════════════════╝
+
+
+   Sandwich:    Large, WhiteBread            $  8.50
+     ↳ Toasted: true                        $0.00
+     • Meat:    Steak                      $  3.00
+     • Cheese:  American                   $  2.25
+     • RegularTopping: Lettuce                    $  0.00
+     • Sauces:  Mayo                       $  0.00
+
+   Sandwich:    Large, WhiteBread            $  8.50
+     ↳ Toasted: true                        $0.00
+     • Meat:    Steak                      $  3.00
+     • Meat:    Chicken                    $  1.50
+     • Cheese:  Cheddar                    $  2.25
+     • RegularTopping: Lettuce                    $  0.00
+     • RegularTopping: Onion                      $  0.00
+     • RegularTopping: Pepper                     $  0.00
+     • Sauces:  Mayo                       $  0.00
+
+   Sandwich:    Large, WhiteBread            $  8.50
+     ↳ Toasted: true                        $0.00
+     • Meat:    Steak                      $  3.00
+     • Meat:    Chicken                    $  1.50
+     • Meat:    Ham                        $  1.50
+     • Meat:    Salami                     $  1.50
+     • Cheese:  Cheddar                    $  2.25
+     • Cheese:  Swiss                      $  0.90
+     • RegularTopping: Lettuce                    $  0.00
+     • RegularTopping: Onion                      $  0.00
+     • RegularTopping: Pepper                     $  0.00
+     • Sauces:  Mayo                       $  0.00
+     • Sauces:  Mustard                    $  0.00
+     • Sauces:  Ranch                      $  0.00
+
+   Sandwich:    Large, WhiteBread            $  8.50
+     ↳ Toasted: true                        $0.00
+     • Meat:    Steak                      $  3.00
+     • Cheese:  Cheddar                    $  2.25
+     • Cheese:  Swiss                      $  0.90
+     • RegularTopping: Pepper                     $  0.00
+     • RegularTopping: Jalapeños                  $  0.00
+     • Sauces:  Ketchup                    $  0.00
+
+Total:  62.8

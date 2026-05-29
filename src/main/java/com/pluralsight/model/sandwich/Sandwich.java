@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
+/**
+ * Represents a customizable sandwich item within an order.
+ */
 public class Sandwich implements OrderItem {
 
     // --- Fields ---
@@ -16,39 +19,65 @@ public class Sandwich implements OrderItem {
     protected String shouldToast; // yes = true, no = false
 
     // --- Constructor ---
+    /**
+     * Constructs a custom Sandwich with a size, bread type, and toasting preference.
+     * @param sandwichSize the chosen size of the sandwich (e.g., Small, Medium, Large)
+     * @param typeOfBread the type of bread wrapper object
+     * @param shouldToast the user response indicating if the sandwich should be toasted
+     */
     public Sandwich(String sandwichSize, Bread typeOfBread, String shouldToast) {
         this.sandwichSize = sandwichSize;
         this.typeOfBread = typeOfBread;
         this.shouldToast = shouldToast;
         this.toppings = new ArrayList<>();
-
     }
 
-
     // --- Getters & Setters ---
+    /**
+     * Gets the size designation of the sandwich.
+     * @return the size string
+     */
     public String getSandwichSize() {
         return sandwichSize;
     }
 
+    /**
+     * Gets the raw bread type enum value.
+     * @return the bread type enum
+     */
     public BreadType getTypeOfBread() {
         return typeOfBread.breadType;
     }
 
+    /**
+     * Gets the list of toppings added to this sandwich.
+     * @return a list of toppings
+     */
     public List<Toppings> getToppings() {
         return toppings;
     }
 
+    /**
+     * Gets the toast option preference string.
+     * @return the toast choice string
+     */
     public String getShouldToast() {
         return shouldToast;
     }
 
     // --- Public Business Logic Methods ---
+    /**
+     * Adds a specific topping to the sandwich's topping tracker list.
+     * @param topping the topping instance to add
+     */
     public void addTopping(Toppings topping) {
         toppings.add(topping);
     }
 
-
-
+    /**
+     * Determines the base price tier depending on the size of the sandwich.
+     * @return the base size price as a double
+     */
     public double priceOfSize() {
         String sizeOfBread = getSandwichSize();
         double priceSize = 0;
@@ -60,6 +89,10 @@ public class Sandwich implements OrderItem {
         return priceSize;
     }
 
+    /**
+     * Calculates the combined price accumulated from all added premium toppings.
+     * @return total premium toppings cost
+     */
     public double getPriceToppings() {
         double total = 0;
         for (Toppings topping : toppings) {
@@ -68,14 +101,20 @@ public class Sandwich implements OrderItem {
         return total;
     }
 
-
-
     // --- Overridden Methods ---
+    /**
+     * Calculates the grand total price of the sandwich (base size price + toppings).
+     * @return total sandwich price as a double
+     */
     @Override
     public double getPrice() {
         return priceOfSize() + getPriceToppings();
     }
 
+    /**
+     * Generates a detailed console display interface summary block of the sandwich.
+     * @return formatted console display string
+     */
     @Override
     public String getDescription() {
         StringBuilder toppingDetails = new StringBuilder();
@@ -104,6 +143,10 @@ public class Sandwich implements OrderItem {
                 + String.format("   💲 %-42s $%.2f", "TOTAL:", getPrice()) + "\n";
     }
 
+    /**
+     * Formats the sandwich data and nested toppings breakdown strictly for final receipt generation.
+     * @return columns-aligned receipt output text block
+     */
     public String forReceipt() {
         StringBuilder receiptBuilder = new StringBuilder();
 
@@ -133,11 +176,11 @@ public class Sandwich implements OrderItem {
         return receiptBuilder.toString();
     }
 
-
-
     // --- Private Helper Methods ---
+    /**
+     * Formats a single specification line matching standard column rules.
+     */
     private String line(String label, String value, double price) {
         return String.format("   %-12s %-30s $%.2f", label, value, price);
     }
-
 }

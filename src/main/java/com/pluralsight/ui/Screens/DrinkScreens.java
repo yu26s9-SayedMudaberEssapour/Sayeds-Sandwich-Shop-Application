@@ -5,10 +5,14 @@ import com.pluralsight.enums.DrinkSize;
 import com.pluralsight.model.drink.Drink;
 import com.pluralsight.ui.Console;
 
+/**
+ * Handles the user interface screens for choosing drink sizes, flavors, and ice customizations.
+ */
 public class DrinkScreens {
 
     /**
-     * This method will be in charge of adding the drink to the order of the customer.
+     * Guides the user through configuration options to construct and add a drink to their order.
+     * @return a fully constructed Drink item matching customer choices
      */
     public static Drink addDrink() {
         DrinkSize drinkSize = drinkSize();
@@ -22,13 +26,13 @@ public class DrinkScreens {
     }
 
     /**
-     * This method will ask the user what size drink they want. It will return the size of the drink
-     * in small, medium, large
-     * @return the size of the drink
+     * Displays the size selection menu and loops until a valid drink size selection is processed.
+     * @return the selected DrinkSize enum value
      */
     public static DrinkSize drinkSize() {
         DrinkSize result = null;
         int sizeOfDrink = 0;
+
         do {
             sizeOfDrink = Console.promptForInt(("""
                 ╔══════════════════════════════════════════════════════╗
@@ -51,94 +55,100 @@ public class DrinkScreens {
                 case 1 -> result = DrinkSize.Small;
                 case 2 -> result = DrinkSize.Medium;
                 case 3 -> result = DrinkSize.Large;
-                default -> { }
+                default -> System.out.println("⚠️ Invalid size choice. Please pick [1], [2], or [3].\n");
             }
             if ((sizeOfDrink == 1) || (sizeOfDrink == 2) || (sizeOfDrink == 3)) {
                 break;
             }
-        } while ((sizeOfDrink != 1) || (sizeOfDrink != 2) || sizeOfDrink != 3);
+        } while (true);
 
         return result;
     }
 
     /**
-     * This method will ask the user for what flavor of drink they want. It will return the flavor's name.
-     * @return the name of the flavor of drink.
+     * Displays the refreshment menu and loops until a valid drink flavor selection is processed.
+     * @return the selected DrinkFlavor enum value
      */
     public static DrinkFlavor drinkFlavor() {
-        int flavor = Console.promptForInt("""
-                ╔══════════════════════════════════════════════════════╗
-                ║                SELECT YOUR FLAVOR 🥤                 ║
-                ╚══════════════════════════════════════════════════════╝
-                
-                Choose your favorite refreshment!
-                
-                ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-                
-                🥤 DRINK FLAVORS
-                   [1]  Coca-Cola       🥤
-                   [2]  Sprite          🍋‍🟩
-                   [3]  Dr Pepper       🤎
-                   [4]  Fanta Orange    🍊
-                   [5]  Root Beer       🍺
-                   [6]  Lemonade        🍋
-                   [7]  Sweet Tea       🫖
-                   [8]  Unsweet Tea     🍃
-                   [9]  Mountain Dew    🟢
-                   [10] Pepsi           🔵
-                   [11] Cherry Coke     🍒
-                   [12] Fruit Punch     🍓
-                
-                ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-                """);
         DrinkFlavor result = null;
 
-        switch (flavor) {
-            case 1 -> result = DrinkFlavor.COCA_COLA;
-            case 2 -> result = DrinkFlavor.SPRITE;
-            case 3 -> result = DrinkFlavor.DR_PEPPER;
-            case 4 -> result = DrinkFlavor.FANTA_ORANGE;
-            case 5 -> result = DrinkFlavor.ROOT_BEER;
-            case 6 -> result = DrinkFlavor.LEMONADE;
-            case 7 -> result = DrinkFlavor.SWEET_TEA;
-            case 8 -> result = DrinkFlavor.UNSWEET_TEA;
-            case 9 -> result = DrinkFlavor.MOUNTAIN_DEW;
-            case 10 -> result = DrinkFlavor.PEPSI;
-            case 11 -> result = DrinkFlavor.CHERRY_COKE;
-            case 12 -> result = DrinkFlavor.FRUIT_PUNCH;
-            default -> System.out.println("⚠️ Invalid drink selection.");
+        while (result == null) {
+            int flavor = Console.promptForInt("""
+                    ╔══════════════════════════════════════════════════════╗
+                    ║                SELECT YOUR FLAVOR 🥤                 ║
+                    ╚══════════════════════════════════════════════════════╝
+                    
+                    Choose your favorite refreshment!
+                    
+                    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                    
+                    🥤 DRINK FLAVORS
+                       [1]  Coca-Cola       🥤
+                       [2]  Sprite          🍋‍🟩
+                       [3]  Dr Pepper       🤎
+                       [4]  Fanta Orange    🍊
+                       [5]  Root Beer       🍺
+                       [6]  Lemonade        🍋
+                       [7]  Sweet Tea       🫖
+                       [8]  Unsweet Tea     🍃
+                       [9]  Mountain Dew    🟢
+                       [10] Pepsi           🔵
+                       [11] Cherry Coke     🍒
+                       [12] Fruit Punch     🍓
+                    
+                    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                    """);
+
+            switch (flavor) {
+                case 1 -> result = DrinkFlavor.COCA_COLA;
+                case 2 -> result = DrinkFlavor.SPRITE;
+                case 3 -> result = DrinkFlavor.DR_PEPPER;
+                case 4 -> result = DrinkFlavor.FANTA_ORANGE;
+                case 5 -> result = DrinkFlavor.ROOT_BEER;
+                case 6 -> result = DrinkFlavor.LEMONADE;
+                case 7 -> result = DrinkFlavor.SWEET_TEA;
+                case 8 -> result = DrinkFlavor.UNSWEET_TEA;
+                case 9 -> result = DrinkFlavor.MOUNTAIN_DEW;
+                case 10 -> result = DrinkFlavor.PEPSI;
+                case 11 -> result = DrinkFlavor.CHERRY_COKE;
+                case 12 -> result = DrinkFlavor.FRUIT_PUNCH;
+                default -> System.out.println("⚠️ Invalid drink selection. Please choose a valid number from the menu.\n");
+            }
         }
 
         return result;
     }
 
     /**
-     * This method will ask the user for the customization on their drink
-     * @return No ice, Extra ice, or add lemon slice.
+     * Displays preparation choices and loops until a valid custom drink variation string is assigned.
+     * @return custom text descriptor string indicating preparation extras
      */
     public static String customizeDrinkOption() {
-        System.out.println("""
-                ╔══════════════════════════════════════════════════════╗
-                ║                CUSTOMIZE DRINK OPTIONS 🧊            ║
-                ╚══════════════════════════════════════════════════════╝
+        String customization = null;
 
-                Choose how you want your drink prepared:
+        while (customization == null) {
+            System.out.println("""
+                    ╔══════════════════════════════════════════════════════╗
+                    ║                CUSTOMIZE DRINK OPTIONS 🧊            ║
+                    ╚══════════════════════════════════════════════════════╝
+    
+                    Choose how you want your drink prepared:
+    
+                       [1] ❄️  Extra Ice
+                       [2] 🚫🧊 No Ice
+                       [3] 🍋 Lemon Slice
+    
+                    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                    """);
 
-                   [1] ❄️  Extra Ice
-                   [2] 🚫🧊 No Ice
-                   [3] 🍋 Lemon Slice
+            int extras = Console.promptForInt("👉 Enter your response here: ");
 
-                ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-                """);
-
-        int extras = Console.promptForInt("👉 Enter your response here: ");
-        String customization = "";
-
-        switch (extras) {
-            case 1 -> customization = "❄️  Extra Ice";
-            case 2 -> customization = "🚫🧊 No Ice";
-            case 3 -> customization = "🍋 Lemon Slice";
-            default -> System.out.println("⚠️ Invalid input");
+            switch (extras) {
+                case 1 -> customization = "❄️  Extra Ice";
+                case 2 -> customization = "🚫🧊 No Ice";
+                case 3 -> customization = "🍋 Lemon Slice";
+                default -> System.out.println("⚠️ Invalid input. Please select a number from 1 to 3.\n");
+            }
         }
 
         return customization;

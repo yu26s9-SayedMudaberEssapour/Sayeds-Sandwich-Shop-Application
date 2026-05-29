@@ -10,15 +10,23 @@ import java.util.HashMap;
 
 import static com.pluralsight.model.order.Order.getItems;
 
+/**
+ * Handles generating and saving order receipts to text files.
+ */
 public class ReceiptBuilder {
 
-
+    /**
+     * Processes a single order item to get its receipt representation.
+     * @param order the order item to process
+     */
     public void getReceiptString(OrderItem order) {
 
     }
 
+    /**
+     * Automatically builds, formats, and saves the active order receipt to a localized text file.
+     */
     public static void saveReceiptString() {
-
 
         try {
             LocalDateTime date = LocalDateTime.now();
@@ -26,7 +34,6 @@ public class ReceiptBuilder {
             DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("yyyyMMdd-hhmmss");
 
             String formattedDate = date.format(myFormatObj);
-
 
             FileWriter fr = new FileWriter("src/main/java/com/pluralsight/Receipt/" + formattedDate + ".txt");
 
@@ -38,11 +45,7 @@ public class ReceiptBuilder {
                     ╚══════════════════════════════════════════════════════╝
                     
                     """ + "\n"
-
             );
-
-
-
 
             //runa different method
             double total = 0;
@@ -55,30 +58,8 @@ public class ReceiptBuilder {
 
             fr.close();
 
-
         } catch (IOException e) {
             e.getMessage();
         }
-
     }
-
-
-//    public String receipt() {
-//        StringBuilder sb = new StringBuilder();
-//
-//        sb.append("===== ORDER RECEIPT =====\n");
-//
-//        for (OrderItem item : items) {
-//            sb.append(item.getDescription())
-//                    .append(" - $")
-//                    .append(String.format("%.2f", item.getPrice()))
-//                    .append("\n");
-//        }
-//
-//        sb.append("------------------------\n");
-//        sb.append("TOTAL: $")
-//                .append(String.format("%.2f", calculateTotal()));
-//
-//        return sb.toString();
-//    }
 }

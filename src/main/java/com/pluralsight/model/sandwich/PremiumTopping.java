@@ -3,9 +3,15 @@ package com.pluralsight.model.sandwich;
 public abstract class PremiumTopping extends Toppings{
 
 
-
-    //should calculate and get the price of meat.
+    /**
+     *
+     * @return the price
+     */
     public abstract double getPrice();
 
+    /**
+     *
+     * @return price for extra of meat or cheese
+     */
     public abstract double getPriceForExtra();
 }
