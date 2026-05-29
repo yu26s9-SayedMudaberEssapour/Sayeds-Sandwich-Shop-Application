@@ -24,6 +24,7 @@ public class Sandwich implements OrderItem {
 
     }
 
+
     // --- Getters & Setters ---
     public String getSandwichSize() {
         return sandwichSize;
@@ -45,6 +46,8 @@ public class Sandwich implements OrderItem {
     public void addTopping(Toppings topping) {
         toppings.add(topping);
     }
+
+
 
     public double priceOfSize() {
         String sizeOfBread = getSandwichSize();
@@ -166,24 +169,4 @@ public class Sandwich implements OrderItem {
         return String.format("   %-12s %-30s $%.2f", label, value, price);
     }
 
-//    @Override
-//    public String toString() {
-//        return """
-//                                                                ╔══════════════════════════════════════════════════════╗
-//                                                                ║                 🥪 SANDWICH DETAILS                  ║
-//                                                                ╚══════════════════════════════════════════════════════╝
-//
-//                                                                """
-//                                                                + line("📏 Size:", String.valueOf(sandwichSize), priceOfSize()) + "\n"
-//                                                                + line("🍞 Bread:", String.valueOf(typeOfBread), 0) + "\n"
-//                                                                + line("🔥 Toasted:", String.valueOf(shouldToast), 0) + "\n"
-//                                                                + line("🥩 Meat:", String.valueOf(Meat.getMeatType()), 0) + "\n"
-//                                                                + line("🧀 Cheese:", String.valueOf(Cheese.getType()), 0) + "\n"
-//                                                                + line("🥫 Sauces:", String.valueOf(Sauces.getSauce()), 0) + "\n"
-//                                                                + line("🥬 Toppings:", String.valueOf(toppings), 0) + "\n\n"
-//                                                                + String.format("   💲 %-42s $%.2f", "TOTAL:", getPrice()) + "\n"
-//                                                                + """
-//                                                                ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-//        """;
-//    }
 }

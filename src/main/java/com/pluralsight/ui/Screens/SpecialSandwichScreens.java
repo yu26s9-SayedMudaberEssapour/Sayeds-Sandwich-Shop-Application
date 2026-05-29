@@ -1,176 +1,139 @@
 package com.pluralsight.ui.Screens;
 
-import com.pluralsight.model.sandwich.*;
+import com.pluralsight.enums.CheeseTypes;
+import com.pluralsight.enums.MeatTypes;
 import com.pluralsight.enums.RegularToppingsType;
 import com.pluralsight.enums.SauceTypes;
+import com.pluralsight.model.sandwich.*;
 import com.pluralsight.ui.Console;
-import com.pluralsight.enums.*;
-
-import com.pluralsight.model.order.OrderItem;
 
 import java.util.ArrayList;
 
-public class SandwichScreens {
+public class SpecialSandwichScreens {
 
-    // --- Add Sandwich (3rd Screen) ---
-    public static Sandwich AddSandwich() {
-        // (1) ask the customer for the size of the sandwich
-        String SizeOfSandwich = sandwichSize();
-        String sizeofSandwich = SizeOfSandwich;
+    public static SayedSignitureSandwich addSpecialSandwich() {
+        SayedSignitureSandwich sandwich = null;
 
-        // (2) first ask the customer for their bread type
-        Bread breadInput = SelectBread();
+        System.out.println("""
+            ╔══════════════════════════════════════════════════════╗
+            ║              SIGNATURE SANDWICHES 👑                 ║
+            ╚══════════════════════════════════════════════════════╝
+            
+            Pick from our premium, chef-designed recipes:
+            
+               [1] Sayed's Special Sandwich 👑
+               [2] Monster Sandwich         👹
+            
+            ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            """);
 
-        // (3) ask the user if they want sandwich toasted
-        String shouldToast = shouldToast();
+        int input = Console.promptForInt("👉 Please enter your response: ");
 
-        Sandwich sandwich = new Sandwich(SizeOfSandwich, breadInput, shouldToast);
+        switch (input) {
+            case 1 -> {
+                System.out.println("""
+                    ❓ Would you like to customize your sandwich's toppings? 
+                    
+                       [1] Yes - Customize it 🥬
+                       [2] No  - Give it to me as it is ⭐
+                    
+                    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                    """);
+                int input2 = Console.promptForInt("👉 Your Response: ");
 
-        // (4) list of meat
-        ArrayList<MeatTypes> listOfMeats = selectMeat(sizeofSandwich);
-
-        for (int i = 0; i < listOfMeats.size(); i++) {
-            if (i == 0) {
-                sandwich.addTopping(new Meat(listOfMeats.get(i), sizeofSandwich, false));
-            } else {
-                sandwich.addTopping(new Meat(listOfMeats.get(i), sizeofSandwich, true));
+                switch (input2) {
+                    case 1 -> {
+                        System.out.println("🔧 Customizing the sandwich...");
+                        sandwich = customize();
+                    }
+                    case 2 -> {
+                        System.out.println("✅ The standard Sayed Special has been created!");
+                        sandwich = SayedSpecialSandwich();
+                    }
+                    default -> System.out.println("⚠️ Sorry, you picked an invalid option.");
+                }
             }
+            case 2 -> {
+                System.out.println("👹 Monster sandwich selected!");
+                // assumed method call for Monster Sandwich down the line:
+                // sandwich = MonsterSandwich();
+            }
+            default -> System.out.println("⚠️ Invalid signature sandwich choice.");
         }
 
-        // (5) list of Cheese
-        ArrayList<CheeseTypes> listOfCheese = selectCheese(sizeofSandwich);
-
-        for (int i = 0; i < listOfCheese.size(); i++) {
-            if (i == 0) {
-                sandwich.addTopping(new Cheese(listOfCheese.get(i), sizeofSandwich, false));
-            } else {
-                sandwich.addTopping(new Cheese(listOfCheese.get(i), sizeofSandwich, true));
-            }
+        // Print description only if a sandwich was successfully built
+        if (sandwich != null) {
+            System.out.println(sandwich.getDescription());
         }
-
-        // (6) regular toppings
-        selectRegularTopping().forEach(topping -> sandwich.addTopping(new RegularTopping(topping)));
-
-        // (7) list of sauces
-        selectSauce().forEach(sauce -> sandwich.addTopping(new Sauces(sauce)));
-
-        System.out.println(sandwich.getDescription());
-
 
         return sandwich;
     }
 
+    private static SayedSignitureSandwich customize(){
+        SayedSignitureSandwich sayedSandwich = new SayedSignitureSandwich();
 
 
-    // --- Should Toast ---
-    private static String shouldToast() {
-        boolean result = false;
+        // (4) list of meat
+        ArrayList<MeatTypes> listOfMeats = selectMeat("Large");
 
-        System.out.println("""
-            ╔══════════════════════════════════════════════════════╗
-            ║               TOAST YOUR SANDWICH 🔥                 ║
-            ╚══════════════════════════════════════════════════════╝
-            
-            Make it warm, crispy, and extra delicious!
-            
-            ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-            
-            🔥 WOULD YOU LIKE YOUR SANDWICH TOASTED?
-            
-               [1] Yes — Toast my sandwich 🔥
-               [2] No  — Keep it fresh 🥗
-            
-            ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-            """);
-        int shouldToast = Console.promptForInt("👉 Enter your choice (1/2): ");
-
-        switch (shouldToast) {
-            case 1:
-                result = true;
-                break;
-            case 2:
-                break;
-            default:
-                break;
-        }
-        return (!result) ? ("No") : ("Yes");
-    }
-
-    // --- Sandwich Size ---
-    public static String sandwichSize() {
-        String result = "";
-        int sizeOfSandwich = 0;
-        do {
-            System.out.println("""
-                ╔══════════════════════════════════════════════════════╗
-                ║                SELECT YOUR SIZE 📏                   ║
-                ╚══════════════════════════════════════════════════════╝
-                
-                Choose the perfect size for your sandwich!
-                
-                ════════════════════════════════════════════════════════
-                
-                📏 AVAILABLE SIZES
-                   [1] Small   - 4 Inches  🥪
-                   [2] Medium  - 8 Inches  🥖
-                   [3] Large   - 12 Inches 👑
-                
-                ════════════════════════════════════════════════════════
-                """);
-            sizeOfSandwich = Console.promptForInt("👉 Please enter the corresponding number for your sandwich size: ");
-
-            switch (sizeOfSandwich) {
-                case 1:
-                    result = "Small";
-                    break;
-                case 2:
-                    result = "Medium";
-                    break;
-                case 3:
-                    result = "Large";
-                    break;
-                default:
-                    break;
+        for (int i = 0; i < listOfMeats.size(); i++) {
+            if (i == 0) {
+                sayedSandwich.addTopping(new Meat(listOfMeats.get(i), "Large", false));
+            } else {
+                sayedSandwich.addTopping(new Meat(listOfMeats.get(i), "Large", true));
             }
-            if ((sizeOfSandwich == 1) || (sizeOfSandwich == 2) || (sizeOfSandwich == 3)) {
-                break;
-            }
-        } while ((sizeOfSandwich < 1) && (sizeOfSandwich > 3));
-
-        return result;
-    }
-
-    // --- Select Bread ---
-    public static Bread SelectBread() {
-        BreadType breadType = null;
-        System.out.println("""
-                ╔══════════════════════════════════════════════════════╗
-                ║                 SELECT YOUR BREAD 🍞                 ║
-                ╚══════════════════════════════════════════════════════╝
-                
-                Freshly baked and ready for your sandwich!
-                
-                ════════════════════════════════════════════════════════
-                
-                🍞 BREAD OPTIONS
-                   [1] White Bread 🤍
-                   [2] Wheat Bread 🤎
-                   [3] Rye Bread   🌾
-                   [4] Wrap        🌯
-                
-                ════════════════════════════════════════════════════════
-                """);
-        int input = Console.promptForInt("👉 Enter your Bread choice: ");
-
-        switch (input) {
-            case 1 -> breadType = BreadType.WhiteBread;
-            case 2 -> breadType = BreadType.WheatBread;
-            case 3 -> breadType = BreadType.RyeBread;
-            case 4 -> breadType = BreadType.Wrap;
         }
 
-        return new Bread(breadType);
+        // (5) list of Cheese
+        ArrayList<CheeseTypes> listOfCheese = selectCheese("Large");
+
+        for (int i = 0; i < listOfCheese.size(); i++) {
+            if (i == 0) {
+                sayedSandwich.addTopping(new Cheese(listOfCheese.get(i), "Large", false));
+            } else {
+                sayedSandwich.addTopping(new Cheese(listOfCheese.get(i), "Large", true));
+            }
+        }
+
+        // (6) regular toppings
+        selectRegularTopping().forEach(topping -> sayedSandwich.addTopping(new RegularTopping(topping)));
+
+        // (7) list of sauces
+        selectSauce().forEach(sauce -> sayedSandwich.addTopping(new Sauces(sauce)));
+
+        System.out.println(sayedSandwich.getDescription());
+
+        return sayedSandwich;
+
     }
+
+
+
+    /**
+     *
+     * @return a custom-made Sayed's Sandwich
+     */
+    private static SayedSignitureSandwich SayedSpecialSandwich(){
+
+        SayedSignitureSandwich sayedSandwich = new SayedSignitureSandwich();
+
+        sayedSandwich.addTopping(new Meat(MeatTypes.Steak, "Large", false) );
+        sayedSandwich.addTopping(new Meat(MeatTypes.Chicken, "Large", true));
+
+        sayedSandwich.addTopping(new Cheese(CheeseTypes.Cheddar, "Large", false));
+
+        sayedSandwich.addTopping(new RegularTopping(RegularToppingsType.Lettuce));
+        sayedSandwich.addTopping(new RegularTopping(RegularToppingsType.Onion));
+        sayedSandwich.addTopping(new RegularTopping(RegularToppingsType.Pepper));
+
+        sayedSandwich.addTopping(new Sauces(SauceTypes.Mayo));
+
+
+
+
+        return sayedSandwich;
+    }
+
 
     // --- Select Sauce ---
     private static ArrayList<SauceTypes> selectSauce() {
