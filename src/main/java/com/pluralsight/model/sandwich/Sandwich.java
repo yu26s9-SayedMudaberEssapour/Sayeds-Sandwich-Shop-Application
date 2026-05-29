@@ -68,36 +68,7 @@ public class Sandwich implements OrderItem {
         return total;
     }
 
-    public double getPriceMeatInSandwich() {
-        double regular = 0;
-        double extra = 0;
-        double meatCounter = 0;
 
-        for (Toppings topping : toppings) {
-            if (topping.isPremium() && (topping instanceof Meat)) {
-                Meat meat = (Meat) topping;
-                meatCounter++;
-                if (meatCounter < 1) {
-                    regular += meat.getPrice();
-                } else {
-                    extra += meat.getPriceForExtra();
-                }
-            }
-        }
-        return regular + extra;
-    }
-
-    public void toppingPrice() {
-        for (Toppings t : toppings) {
-            if (t.isPremium() && t instanceof Meat) {
-                // Left empty as in original code
-            }
-        }
-    }
-
-    public String toReceiptString() {
-        return null;
-    }
 
     // --- Overridden Methods ---
     @Override

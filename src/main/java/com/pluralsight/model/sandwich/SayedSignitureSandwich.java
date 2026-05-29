@@ -10,7 +10,7 @@ public class SayedSignitureSandwich extends Sandwich{
     private final String Name = "Sayed's-Signature-Sandwich";
     private final boolean shouldToast = true;
     private final String sandwichSize = "Large"; // ask the user for 4" 8" 12"
-    private final BreadType typeOfBread = BreadType.WheatBread;
+    private BreadType typeOfBread;
 
     private List<Toppings> topping;
 
@@ -22,7 +22,6 @@ public class SayedSignitureSandwich extends Sandwich{
     }
 
 
-
     public String getName() {
         return Name;
     }
@@ -30,6 +29,31 @@ public class SayedSignitureSandwich extends Sandwich{
     @Override
     public List<Toppings> getToppings() {
         return topping;
+    }
+
+    @Override
+    public double getPrice(){
+        return priceOfSize() + getPriceToppings();
+    }
+    @Override
+    public double priceOfSize() {
+        String sizeOfBread = getSandwichSize();
+        double priceSize = 0;
+        switch (sizeOfBread) {
+            case "Small" -> priceSize += 5.50;
+            case "Medium" -> priceSize += 7.00;
+            case "Large" -> priceSize += 8.50;
+        }
+        return priceSize;
+    }
+
+    @Override
+    public double getPriceToppings() {
+        double total = 0;
+        for (Toppings topping : topping) {
+            total += topping.getPrice();
+        }
+        return total;
     }
 
     @Override
@@ -55,6 +79,7 @@ public class SayedSignitureSandwich extends Sandwich{
 
     @Override
     public String getDescription() {
+
         StringBuilder toppingDetails = new StringBuilder();
 
         // Loop through the inherited toppings list
@@ -74,12 +99,12 @@ public class SayedSignitureSandwich extends Sandwich{
             ║            👑 SIGNATURE SANDWICH DETAILS             ║
             ╚══════════════════════════════════════════════════════╝
             """
-                + String.format("   %-12s %-30s $%.2f%n", "📏 Size:", getSandwichSize(), priceOfSize())
-                + String.format("   %-12s %-30s $%.2f%n", "🍞 Bread:", "WheatBread", 0.00) // Adjust if dynamic
-                + String.format("   %-12s %-30s $%.2f%n", "🔥 Toasted:", getShouldToast(), 0.00)
+                + line("📏 Size:", String.valueOf(sandwichSize), priceOfSize()) + "\n"
+                + line("🍞 Bread:", String.valueOf(getTypeOfBread()), 0) + "\n"
+                + line("🔥 Toasted:", String.valueOf(shouldToast), 0) + "\n"
                 + "   🥬 Toppings:\n"
-                + (toppingDetails.length() == 0 ? "     (No toppings added)\n" : toppingDetails) + "\n"
-                + String.format("   💲 %-42s $%.2f%n", "TOTAL:", getPrice());
+                + toppingDetails + "\n"
+                + String.format("   💲 %-42s $%.2f", "TOTAL:", getPrice()) + "\n";
     }
 
     // --- Private Helper Methods ---
