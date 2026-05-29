@@ -16,6 +16,8 @@ public class Order {
         return items;
     }
 
+
+
     public double calculateTotal() {
         double total = 0;
 
@@ -26,22 +28,5 @@ public class Order {
         return total;
     }
 
-    public String receipt() {
-        StringBuilder sb = new StringBuilder();
 
-        sb.append("===== ORDER RECEIPT =====\n");
-
-        for (OrderItem item : items) {
-            sb.append(item.getDescription())
-                    .append(" - $")
-                    .append(String.format("%.2f", item.getPrice()))
-                    .append("\n");
-        }
-
-        sb.append("------------------------\n");
-        sb.append("TOTAL: $")
-                .append(String.format("%.2f", calculateTotal()));
-
-        return sb.toString();
-    }
 }

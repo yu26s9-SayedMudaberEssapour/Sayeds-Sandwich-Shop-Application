@@ -3,6 +3,10 @@ package com.pluralsight.ui.Screens;
 import com.pluralsight.model.order.Order;
 import com.pluralsight.model.order.OrderItem;
 import com.pluralsight.ui.Console;
+import com.pluralsight.services.ReceiptBuilder;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CheckOutScreens extends Order {
 
@@ -10,8 +14,9 @@ public class CheckOutScreens extends Order {
 
     public static void checkOut(){
 
+        List<OrderItem> items = getItems();
         double total = 0;
-        for(OrderItem o : getItems()){
+        for(OrderItem o : items){
             System.out.println(o.getDescription());
             total += o.getPrice();
 
@@ -19,6 +24,7 @@ public class CheckOutScreens extends Order {
         System.out.println("""
                 Total price is: -%d
                 """ + total);
+
 
 
         System.out.println("""
@@ -41,8 +47,14 @@ public class CheckOutScreens extends Order {
         int input  = Console.promptForInt("Please enter your response: ");
 
         switch (input){
-            case 1 -> System.out.println("hi");
-            case 2 -> System.out.println("you have deleted order, returning to Home Screen");
+            case 1 :
+                ReceiptBuilder.saveReceiptString();
+                System.out.println("Thanks for shopping with us. ");
+            case 2 :
+                items.clear();
+                System.out.println("returning back to home screen.");
+
+
 
         }
 

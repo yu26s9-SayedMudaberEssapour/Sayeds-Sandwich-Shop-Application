@@ -81,6 +81,18 @@ public class Drink implements OrderItem {
                             """;
     }
 
+    public String forReceipt() {
+        // Combines size, flavor, and extras into a readable single-line item description
+        String itemDetails = String.format("%s %s (%s)", size, flavor, extras);
+
+        // Aligns perfectly with the columns in your sandwich and chips receipt items
+        return String.format("   %-12s %-28s $%6.2f%n",
+                "Drink:",
+                itemDetails,
+                getPrice()
+        );
+    }
+
 
 
     //-----------------------------------------------------Showcase-----------------------------------------------------

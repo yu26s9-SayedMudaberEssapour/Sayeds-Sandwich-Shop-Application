@@ -1,0 +1,14 @@
+╔══════════════════════════════════════════════════════╗
+║                 Sayed's Sandwich Shop                ║
+║                 2245 8th st Washington DC            ║
+║                 555-989-4532                         ║
+╚══════════════════════════════════════════════════════╝
+
+
+   Sandwich:    Small, WhiteBread            $  8.05
+
+   Drink:       Small SPRITE (🍋 Lemon Slice) $  2.00
+
+   Chips:       SALT_AND_VINEGAR             $  1.50
+
+Total:  11.55

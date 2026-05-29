@@ -130,6 +130,35 @@ public class Sandwich implements OrderItem {
                 + String.format("   💲 %-42s $%.2f", "TOTAL:", getPrice()) + "\n";
     }
 
+    public String forReceipt() {
+        StringBuilder receiptBuilder = new StringBuilder();
+
+        // 1. Core Sandwich Line Item
+        String sandwichCore = String.format("%s, %s", sandwichSize, typeOfBread.breadType);
+        receiptBuilder.append(String.format("   %-12s %-28s $%6.2f%n",
+                "Sandwich:",
+                sandwichCore,
+                priceOfSize()
+        ));
+
+        // 2. Prep Option Line (Toasted)
+        receiptBuilder.append(String.format("     ↳ %-36s $%.2f%n",
+                "Toasted: " + shouldToast,
+                0.00
+        ));
+
+        // 3. Loop Through and Append Every Topping
+        for (Toppings topping : toppings) {
+            receiptBuilder.append(String.format("     • %-8s %-26s $%6.2f%n",
+                    topping.getClass().getSimpleName() + ":",
+                    topping.toString().trim(),
+                    topping.getPrice()
+            ));
+        }
+
+        return receiptBuilder.toString();
+    }
+
 
 
     // --- Private Helper Methods ---

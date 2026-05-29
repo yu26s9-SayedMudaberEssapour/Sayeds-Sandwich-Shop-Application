@@ -6,7 +6,7 @@ public interface OrderItem{
 
     public String getDescription();
 
-
+    public String forReceipt();
 
 
 }

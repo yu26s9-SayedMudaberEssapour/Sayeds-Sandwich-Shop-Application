@@ -1,0 +1,28 @@
+╔══════════════════════════════════════════════════════╗
+║                 Sayed's Sandwich Shop                ║
+║                 2245 8th st Washington DC            ║
+║                 555-989-4532                         ║
+╚══════════════════════════════════════════════════════╝
+
+
+   Sandwich:    Small, WhiteBread            $  5.50
+     ↳ Toasted: Yes                         $0.00
+     • Meat:    Ham                        $  1.00
+     • Meat:    Salami                     $  0.50
+     • Cheese:  Provolone                  $  0.75
+     • Cheese:  Cheddar                    $  0.30
+     • RegularTopping: Pepper                     $  0.00
+     • RegularTopping: Jalapeños                  $  0.00
+     • Sauces:  Mustard                    $  0.00
+     • Sauces:  Ketchup                    $  0.00
+
+   Sandwich:    Small, WheatBread            $  5.50
+     ↳ Toasted: No                          $0.00
+     • Meat:    Ham                        $  1.00
+     • Meat:    Ham                        $  0.50
+     • Meat:    Steak                      $  0.50
+     • Cheese:  Provolone                  $  0.75
+     • RegularTopping: Pepper                     $  0.00
+     • Sauces:  Mustard                    $  0.00
+
+Total:  16.3

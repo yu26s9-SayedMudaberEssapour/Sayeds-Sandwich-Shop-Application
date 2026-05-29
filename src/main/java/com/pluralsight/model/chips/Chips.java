@@ -40,6 +40,18 @@ public class Chips implements OrderItem {
 
     }
 
+    public String forReceipt() {
+
+        return String.format("   %-12s %-28s $%6.2f%n",
+                "Chips:",
+                typeOfChips.toString(),
+                getPrice()
+        );
+    }
+
+
+
+
 
     public Chips(ChipFlavor typeOfChips) {
         this.typeOfChips = typeOfChips;
